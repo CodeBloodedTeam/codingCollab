@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href=""> -->
+
+    <title>Member Profile</title>
+</head>
+
+<body>
+
+    <!-- Collaboration Profile Section II: Get member access to matching options. -->
+    <div class="container">
+        <div id="add-profile" title="Add User Profile">
+            <h2>Get matched with other coders.</h2>
+            <p>If you are interested in collaborating with other coders, complete some additional profile options so we can
+                match you up!</p>
+            <p>(You must be at least 18 years of age to get matched up using Coding Collab.)</p>
+            <!-- Just some sample Materialize input fields... -->
+            <form action="#">
+                <p>
+                    <input type="checkbox" id="interest-confirm" />
+                    <label for="interest-confirm">Yes, I’m interested in connecting with other coders.</label>
+                </p>
+
+            </form>
+
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <div class="pure-g">
+                        <div class="pure-u-1 pure-u-md-1-3">
+                            <label for="display-name">Display Name *</label>
+                            Your Display Name is the name that will display if you choose to connect with other coders. This is a required field to be
+                            matched with other coders.
+                            <input id="display-name" class="pure-u-23-24" type="text">
+                        </div>
+                    </div>
+                    <h3>Location</h3>
+                    <p> Your location will be used to display resources in your area and to possibly match you with other coders.
+                        It will be shown as a pin on a map. If you are concerned about privacy, please use your city or ZIP
+                        code only. </p>
+                    <p> Note: You do not need to enter a location to get matched; you can always choose to collaborate virtually!
+                    </p>
+
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="address">Address</label>
+                        <input id="address" class="pure-u-23-24" type="text">
+                    </div>
+
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="city">City</label>
+                        <input id="city" class="pure-u-23-24" type="text">
+                    </div>
+
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="state">State</label>
+                        <select id="state" class="pure-input-1-2">
+                            <option>AL</option>
+                            <option>CA</option>
+                            <option>IL</option>
+                        </select>
+                    </div>
+
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="zip">ZIP Code</label>
+                        <input id="zip" class="pure-u-23-24" type="text">
+                    </div>
+                    <h3>Collab Matchers</h3>
+                    <p> The following questions will be used to find the best matches for you. None of the questions are required;
+                        however, the more you answer the more accurate your matches will be. </p>
+
+                    <label for="connect-location">I prefer to collaborate... (Select all that apply.)</label>
+                    <input type="checkbox" id="connect-local" />Locally and in person.</input>
+                    <br>
+                    <input type="checkbox" id="connect-loc-vir" />Locally but only virtually.</input>
+                    <br>
+                    <input type="checkbox" id="connect-vir" />Virtually from anywhere.</input>
+                    <br>
+                    <hr>
+                    <label for="exp-level">Experience Level (Select all that apply.)</label>
+                    <input type="checkbox" id="exp-beg-self" />Beginner: Self-Trained</input>
+                    <br>
+                    <input type="checkbox" id="exp-beg-stud" />Beginner: Studying (ex. Bootcamp, Tech School, College)</input>
+                    <br>
+                    <input type="checkbox" id="exp-int" />Intermediate (ex. Junior Developer)</input>
+                    <br>
+                    <input type="checkbox" id="exp-adv" />Advanced (ex. Senior Developer)</input>
+                    <br>
+                    <hr>
+                    <label for="exp-level">I am interested in developing... (Select all that apply.)</label>
+                    <input type="checkbox" id="front-end" />Front-End</input>
+                    <br>
+                    <input type="checkbox" id="back-end" />Back-End</input>
+                    <br>
+                    <input type="checkbox" id="full-stack" />Full Stack</input>
+                    <br>
+                    <input type="checkbox" id="ios" />iOS</input>
+                    <br>
+                    <input type="checkbox" id="android" />Android</input>
+                    <br>
+                    <input type="checkbox" id="other-dev" />Other:</input>
+                    <input class="pure-u-13-14" type="text" id="other-dev-text" />
+                    <hr>
+                    <label for="exp-level">Coding Languages (Select all that apply.)</label>
+                    <input type="checkbox" id="html-css" />HTML/CSS</input>
+                    <br>
+                    <input type="checkbox" id="js-jq" />JavaScript/jQuery</input>
+                    <br>
+                    <input type="checkbox" id="python" />Python</input>
+                    <br>
+                    <input type="checkbox" id="react" />React</input>
+                    <br>
+                    <input type="checkbox" id="java" />Java</input>
+                    <br>
+                    <input type="checkbox" id="c-sharp" />C++</input>
+                    <br>
+                    <input type="checkbox" id="php" />PHP</input>
+                    <br>
+                    <input type="checkbox" id="other-lang1" />Other:</input>
+                    <input class="pure-u-13-14" type="text" id="other-lang-text" />
+                    <input type="checkbox" id="other-lang2" />Other:</input>
+                    <input class="pure-u-13-14" type="text" id="other-lang-text" />
+                    <hr>
+                    <label for="exp-level">I would like to... (Select all that apply.)</label>
+                    <input type="checkbox" id="be-mentor" />Be a mentor.</input>
+                    <br>
+                    <input type="checkbox" id="have-mentor" />Have a mentor.</input>
+                    <br>
+                    <input type="checkbox" id="meet-coder" />Meet people with common coding interests.</input>
+                    <br>
+                    <input type="checkbox" id="collab-proj" />Collaborate on a specific project:</input>
+                    <input class="pure-u-23-24" type="text" id="collab-proj-text"
+                    />
+
+                    <hr>
+                    <h3>More ways to connect and share coding interests:</h3>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="git-hub">GitHub Profile:</label>
+                        <input id="git-hub" class="pure-u-23-24" type="text">
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="link-in">LinkedIn Profile:</label>
+                        <input id="city" class="pure-u-23-24" type="text">
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="pinterest">Pinterest Profile:</label>
+                        <input id="pinterest" class="pure-u-23-24" type="text">
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <label for="other-profile">Other:</label>
+                        <input id="other-profile" class="pure-u-23-24" type="text">
+                    </div>
+                    <hr>
+                    <label for="exp-level">Information kept private and never shared.</label>
+                    <p>Your username, password, and email address will never be shared with other Coding Collab members. If
+                        you receive requests from other coders to connect, if will be using the Slack(?) messaging service.</p>
+                    <p>Other profile information, including your location may be publicly viewable to other members based on
+                        the answers you provided on your profile form.</p>
+                    <input type="checkbox" id="i-agree" />I agree that other Coding Collab members can contact me for collaboration opportunities. *</input>
+                    <br>
+                    <input type="checkbox" id="1-am-18" />I certify that I am at least 18 years old. *</input>
+                    <hr>
+
+                    <div>
+                        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+        <script type="text/javascript" src="auth.js"></script>
+</body>
+
+</html>
