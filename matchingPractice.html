@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Form Practice</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="UTF-8">
+
+    <style>
+        
+
+
+    </style>
+</head>
+
+<body>
+    
+    <form id="userProfile">
+        
+
+    <div class="Basic Profile">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name">
+    </div>
+
+    <div class="Basic Profile">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" id="email">
+    </div>
+
+    <div class="interests"> 
+    <div class="form-group">
+     
+        <input type="checkbox" class="form-control" id="javaScript" >
+        <label for="interests">JavaScript</label>
+    </div>
+
+    <div class="form-group">
+        
+           <input type="checkbox" class="form-control" id="html" >
+           <label for="interests">HTML/CSS</label>
+       </div>
+
+       <div class="form-group">
+        
+           <input type="checkbox" class="form-control" id="python" >
+           <label for="interests">Python</label>
+       </div>
+
+       <div class="form-group">
+        
+           <input type="checkbox" class="form-control" id="ruby" >
+           <label for="interests">Ruby on Rails</label>
+       </div>
+    </div>
+
+
+ 
+    <!--Submit Button-->
+    <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+</form>
+
+<div id ="userMatches"> </div>
+
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script>
+
+        var users = [];
+        var userCount = 1;
+        
+
+        $("#submitBtn").on("click", function() {
+            
+
+            var newUser = {
+            
+            name: "",
+            email:"",
+            languages: {
+                javaScript: false,
+                htmlCSS: false,
+                python: false,
+                ruby: false,
+                }
+            };
+
+            var userName = $("#name").val().trim();
+            newUser.name = userName;
+
+            var userEmail = $("#email").val().trim();
+            newUser.email = userEmail;
+
+        
+            if($("#javaScript").is(':checked')){
+                newUser.languages.javaScript = true;
+                console.log(newUser.languages.javaScript)
+
+            };     
+
+            if($("#html").is(':checked')){
+                newUser.languages.htmlCSS = true;
+                console.log(newUser.languages.htmlCSS)
+
+            };   
+
+            if($("#python").is(':checked')){
+                newUser.languages.python = true;
+                console.log(newUser.languages.python)
+
+            };        
+
+            if($("#ruby").is(':checked')){
+            newUser.languages.ruby = true;
+            console.log(newUser.languages.ruby)
+
+            }; 
+
+            console.log(newUser);         
+
+            var user2Name = {
+                name: "Cindy",
+                email:"Cindy@email.com",
+                languages: {
+                    javaScript: true,
+                    htmlCSS: false,
+                    python: false,
+                    ruby: true,
+                }
+            };
+
+            var user3Name = {
+                name: "Bob",
+                email:"Bob@email.com",
+                languages: {
+                    javaScript: false,
+                    htmlCSS: true,
+                    python: true,
+                    ruby: false,
+                }
+            };
+
+        users.push(user2Name);
+
+        users.push(user3Name);
+
+        console.log(users);
+
+        var matchedUsers = [];
+
+        users.forEach(function(eachUser,index,userArray) {
+           //Set matchscore to 0 between newUser and each current user
+           var matchScore = 0;
+           console.log(eachUser);
+            
+            if ((newUser.languages.javaScript === true) && (eachUser.languages.javaScript === true)){
+                console.log("You're both studying javaScript!")
+                matchScore += 5;
+            };
+
+            if ((newUser.languages.htmlCSS === true) && (eachUser.languages.htmlCSS === true)){
+                console.log("You're both studying HTML & CSS!")
+                matchScore += 5;
+            };
+
+
+            if ((newUser.languages.python === true) && (eachUser.languages.python === true)){
+                console.log("You're both studying Python!!")
+                matchScore += 5;
+            };
+
+
+            if ((newUser.languages.ruby === true) && (eachUser.languages.ruby === true)){
+                console.log("You're both studying Ruby on Rails!")
+                matchScore += 5;
+            };
+
+            console.log("MatchScore: " + matchScore);
+
+            if (matchScore > 9){
+                console.log(eachUser.name + " is a match!");
+                matchedUsers.push(eachUser);
+                console.log(matchedUsers);
+            }
+            else 
+                console.log(eachUser.name + " is not a match!")
+          
+      
+        });
+
+        console.log(matchedUsers);
+
+        
+        matchedUsers.forEach(function(item){
+            $("#userMatches").append(`<p>You matched with: ${item.name}</p>`);
+        })
+
+        
+
+    });
+
+    </script>
+
+</body>
+
+</html>
