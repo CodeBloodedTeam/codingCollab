@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href=""> -->
+
+    <title>Member Profile</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Existing User Login: This will probably not stay here but here now for auth confirmation. -->
+        <div id="existing-user" title="Login Existing User">
+            <h1>Coding Collab: Member Authentication Methods</h1>
+            <hr>
+            <div class="container">
+                <h3>Existing User Login and Logout:</h3>
+                <p>This inline login will appear in the header portion of the page and be visible throughout the application.
+                    Once a user is successfully logged in, their email address (ex. Welcome, sally123@gmail.com!) will replace
+                    the Email/Password text boxes.</p>
+                <div>
+                    <form class="form-inline" action="/action.php">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="existing-user-email" placeholder="Enter email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="existing-user-password" placeholder="Enter password" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-default" id="login-btn">Login</button>
+                        <button type="submit" class="btn btn-default" id="logout-btn">Logout</button>
+                    </form>
+                </div>
+                <hr>
+
+
+                <!-- Base Profile Section I: Register to get member access to coding locations and resources. Create as a modal?-->
+                <div id="new-user" title="Register New User">
+                    <h3>Register New User</h3>
+                    <form>
+                        <fieldset>
+                            <p>[May be created as a modal.] Please create an account if you are interested in becoming a Coding
+                                Collab member! .</p>
+                            <label for="email">Email *</label>
+                            <input type="text" name="email" id="new-user-email" class="text-box" />
+                            <br>
+                            <label for="password">Password *</label>
+                            <input type="text" name="password" id="new-user-password" value="" class="text-box" />
+                            <br>
+                            <button type="button" class="btn btn-default" id="join-btn">Join!</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+        <script type="text/javascript" src="auth.js"></script>
+</body>
+
+</html>
+
+
+<!-- <h3>Already a member? Login Here!</h3>
+                    <form>
+                        <fieldset>
+                            <label for="email">Email *</label>
+                            <input type="text" name="email" id="existing-user-email" class="text-box"><br>
+                            <label for="password">Password *</label>            
+                            <input type="text" name="password" id="existing-user-password" class="text-box"><br>
+                            <!-- <label for="password">Confirm Password *</label> -->
+<!-- <input type="text" name="password" id="register-password" value="" class="text-box" /><br> -->
+<!-- <button type="button" class="btn btn-default" id="login-btn">Login!</button>
+                            <button type="button" class="btn btn-default" id="logout-btn">Logout!</button>
+                        </fieldset>
+                    </form>
