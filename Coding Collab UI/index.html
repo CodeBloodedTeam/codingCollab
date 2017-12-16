@@ -1,42 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coding Collab</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
+
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
       <a id="logo-container" href="index.html" class="brand-logo">Coding Collab</a>
-      
+
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Login / Sign-up</a></li>
+        <li>
+          <a href="#" id="login">Login / Sign-up</a>
+        </li>
       </ul>
     </div>
   </nav>
 
+  <ul id="slide-out" class="side-nav">
+    <li>
+      <div class="container" id="login-sign-up">
+        <h5>Existing User Login</h5>
+      </div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" data-error="wrong" data-success="right" class="validate" required>
+              <label for="icon_prefix">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">lock</i>
+              <input id="icon_lock" type="tel" class="validate" required>
+              <label for="icon_lock">Password</label>
+            </div class="row center">
+            <a class="btn-large waves-effect waves-light brown lighten-1" id="login">Login</a>
+          </div>
+        </form>
+      </div>
+
+    </li>
+    <li>
+      <div class="container">
+        <h5>New User Sign-up</h5>
+      </div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">account_circle</i>
+              <input id="icon_prefix" type="text" data-error="wrong" data-success="right" class="validate" required>
+              <label for="icon_prefix">
+                <b>Email</b>
+              </label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">lock</i>
+              <input id="icon_lock" type="tel" class="validate" required>
+              <label for="icon_lock">Password</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">lock</i>
+              <input id="icon_lock" type="tel" class="validate" required>
+              <label for="icon_lock">Repeat Password</label>
+            </div class="row center">
+            <a class="btn-large waves-effect waves-light brown lighten-1" id="create">Join</a>
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+  <a href="#" data-activates="slide-out" class="button-collapse">
+  </a>
+
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
       <div class="container">
-        <br><br>
+        <br>
+        <br>
         <h1 class="header center black-text text-lighten-2" id="main-header">Coders, unite!</h1>
         <div class="row center">
           <h5 class="header col s12 light">By connecting coders with one another, Coding Collab creates a customized community of support.</h5>
         </div>
         <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light brown lighten-1">Get Started</a>
+          <a id="get-started" class="btn-large waves-effect waves-light brown lighten-1">Get Started</a>
         </div>
-        <br><br>
+        <br>
+        <br>
 
       </div>
     </div>
-    <div class="parallax"><img src="extras/pexels-photo-398532.jpg" alt="All hands in the center" style="width:400px;height:700px;"></div>
+    <div class="parallax">
+      <img src="extras/pexels-photo-398532.jpg" alt="All hands in the center" style="width:400px;height:700px;">
+    </div>
   </div>
 
 
@@ -47,28 +112,39 @@
       <div class="row">
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h2 class="center brown-text">
+              <i class="material-icons">flash_on</i>
+            </h2>
             <h5 class="center">Get Connected</h5>
 
-            <p class="light">We get it, your preferences vary. Complete your Coding Collab profile to tell us what you love, hate, and hope to gain on your coding journey. We'll match you to other coders based on shared interests and goals.</p>
+            <p class="light">We get it, your preferences vary. Complete your Coding Collab profile to tell us what you love, hate, and hope
+              to gain on your coding journey. We'll match you to other coders based on shared interests and goals.</p>
           </div>
         </div>
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">Find your tribe</h5>
-            
-            <p class="light">Whether you're a student, a self-taught pro, or a total newbie, Coding Collab can help you chat with other coders just like you. We want people on all levels to feel included. Don't worry, we aren't going to match you based on your friends' friends and we also aren't going to limit your matches if you've never launched an app.</p>
+            <h2 class="center brown-text">
+              <i class="material-icons">group</i>
+            </h2>
+            <h5 class="center">Find Your Tribe</h5>
+
+            <p class="light">Whether you're a student, a self-taught pro, or a total newbie, Coding Collab can help you chat with other coders
+              just like you. We want people on all levels to feel included. Don't worry, we aren't going to match you based
+              on your friends' friends and we also aren't going to limit your matches if you've never launched an app.</p>
           </div>
         </div>
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Think outside the box</h5>
+            <h2 class="center brown-text">
+              <i class="material-icons">settings</i>
+            </h2>
+            <h5 class="center">Think Outside The Box</h5>
 
-            <p class="light">Coding Collab offers developers a virtual community designed to expand your resources beyond textbooks and local tutors. We give you the option to find coders both locally and virtually, increasing opportunities for mentorship or collaboration.</p>
+            <p class="light">Coding Collab offers developers a virtual community designed to expand your resources beyond textbooks and local
+              tutors. We give you the option to find coders both locally and virtually, increasing opportunities for mentorship
+              or collaboration.</p>
           </div>
         </div>
       </div>
@@ -85,7 +161,9 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="extras/people-office-group-team.jpg" alt="Two people sitting and working together" style="width:300px;height:800px;"></div>
+    <div class="parallax">
+      <img src="extras/people-office-group-team.jpg" alt="Two people sitting and working together" style="width:300px;height:800px;">
+    </div>
   </div>
 
   <div class="container">
@@ -93,9 +171,16 @@
 
       <div class="row">
         <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+          <h3>
+            <i class="mdi-content-send brown-text"></i>
+          </h3>
+          <h4>Together Is Better</h4>
+          <p class="center-align light">At Coding Collab we believe that teamwork makes the dream work.
+            <br>We know you can find the resources to figure it out on your own, but you don't have to!
+            <br>What are you waiting for? Create your profile and start connecting today.</p>
+          <div class="row center">
+            <a id="join-now" class="btn-large waves-effect waves-light brown lighten-1">Join Now</a>
+          </div>
         </div>
       </div>
 
@@ -111,36 +196,25 @@
         </div>
       </div>
     </div>
-    <div class="parallax"><img src="extras/pexels-photo-247819.jpg" alt="Scrabble letters displaying LEARN" style="width:300px;height:800px;"></div>
+    <div class="parallax">
+      <img src="extras/pexels-photo-247819.jpg" alt="Scrabble letters displaying LEARN" style="width:300px;height:800px;">
+    </div>
   </div>
 
   <footer class="page-footer black">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
-          <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">We are a team of bootcamp students working on this project like it's our full time job.</p>
-
-
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-          </ul>
-        </div>
+        <h5 class="center-align white-text">
+          <i>A CodeBlooded Creation &copy; 2017</i>
+        </h5>
       </div>
     </div>
-    
+
     <div class="footer-copyright">
       <div class="container">
-      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        <center>Made by
+          <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </center>
       </div>
     </div>
   </footer>
@@ -150,6 +224,8 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
+  <script src="js/ui.js"></script>
 
-  </body>
+</body>
+
 </html>
