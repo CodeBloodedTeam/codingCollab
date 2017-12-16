@@ -11,6 +11,21 @@
     <!-- Firechat -->
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
     <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+
+
+<!-- Custom CSS -->
+<style>
+    #firechat-wrapper {
+        height: 475px;
+        max-width: 325px;
+        padding: 10px;
+        border: 1px solid rgb(189, 187, 187);
+        background-color: rgb(36, 148, 148);
+        margin: 50px auto;
+        text-align: center;
+        border-radius: 6px;
+        }
+</style>
 </head>
 
 <body>
@@ -35,26 +50,22 @@
 // 1. User clicks a Start Chat button/link next to the profile match they want to connect with.
         $("#start-chat-button").on("click", function (event) {
             console.log("Start Chat button clicked");
+        });
             
 // 2. Basic message window pops up in the main profile section of the page.
     // Firechat "room" should automatically be created. Create a room:
     // https://stackoverflow.com/questions/35170970/how-to-properly-use-the-createroom-function-and-callback-in-firechat
+    // https://stackoverflow.com/questions/35161116/how-do-i-create-chat-rooms-in-firechat ** also how to initiate a user **
     // Firechat.createRoom(roomName, roomType, callback(roomId))
     // Firebase fetches the selected user "match" and places the match into the specified chat room. Do we want a limit?
     // Firechat.getUsersByRoom(roomId, [limit=100], callback)
-        
-
-      });
-    
-
-// 3. Chat is initiated.
-    // Creating Firechat instance
+    // Chat is initiated. 
     var chatRef = firebase.database().ref();
     var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // If the user is logged in, set them as the Firechat user
-            chat.setUser(user.uid, "Anonymous" + user.uid.substr(10, 8));
+            chat.setUser(email, "Matched User" + email);
         } else {
             // If the user is not logged in, sign them in anonymously
             firebase.auth().signInAnonymously().catch(function (error) {
@@ -62,8 +73,7 @@
             });
         }
     });
-
-    
+  
 
     </script>
 
