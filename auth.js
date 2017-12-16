@@ -36,7 +36,7 @@ $("#login-btn").on("click", function (event) {
                //NOT SURE IF I NEED THESE
             var displayName = user.displayName;
             var email = user.email;
-            window.location = 'login/index.html'; //After successful login, user will be redirected to index.html
+            window.location = 'auth-redirect.html'; //After successful login, user will be redirected to index.html
         
             } else {
                 console.log("User is logged out.");
@@ -59,6 +59,7 @@ $("#join-btn").on("click", function (event) {
     console.log("NEW User email: ", email);
     console.log("NEW User password: ", password);
     console.log("NEW User auth: ", auth);
+    
     //Firebase NEW user method
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
         // Handle Errors here.
@@ -66,26 +67,28 @@ $("#join-btn").on("click", function (event) {
         var errorMessage = error.message;
         console.log(error.code);
         console.log(error.message);
-    });
+    }); 
 
+    // Handling the account status and redirecting to a new page.
     firebase.auth().onAuthStateChanged(function (user) {
         
             if (user) {
                 console.log("This user is signed in: ", user.email);
                //NOT SURE IF I NEED THESE
-            var displayName = user.displayName;
-            var email = user.email;
-            window.location = 'login/index.html'; //After successful login, user will be redirected to modal form .html
+            // var displayName = user.displayName;
+            // var email = user.email;
+            window.location = 'auth-redirect.html'; //After successful login, user will be redirected to modal form .html
         
             } else {
                 console.log("User is logged out.");
             }
         });
-
+    
     // Clears all the text boxes
     email = $("#new-user-email").val("");
     password = $("#new-user-password").val("");
 });
+
 
 //Logout button
 $("#logout-btn").on("click", function (event) {
