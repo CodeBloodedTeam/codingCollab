@@ -35,13 +35,13 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" data-error="wrong" data-success="right" class="validate" required>
-              <label for="icon_prefix">Email</label>
+              <input id="existing-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
+              <label for="existing-user-email">Email</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">lock</i>
-              <input id="icon_lock" type="tel" class="validate" required>
-              <label for="icon_lock">Password</label>
+              <input id="existing-user-password" type="tel" class="validate" required>
+              <label for="existing-user-password">Password</label>
             </div class="row center">
             <a class="btn-large waves-effect waves-light brown lighten-1" id="login">Login</a>
           </div>
@@ -58,20 +58,20 @@
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" data-error="wrong" data-success="right" class="validate" required>
-              <label for="icon_prefix">
+              <input id="new-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
+              <label for="new-user-email">
                 <b>Email</b>
               </label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">lock</i>
-              <input id="icon_lock" type="tel" class="validate" required>
-              <label for="icon_lock">Password</label>
+              <input id="new-user-password" type="tel" class="validate" required>
+              <label for="new-user-password">Password</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">lock</i>
-              <input id="icon_lock" type="tel" class="validate" required>
-              <label for="icon_lock">Repeat Password</label>
+              <input id="icon_lock new-user-password" type="tel" class="validate" required>
+              <label for="icon_lock new-user-password">Repeat Password</label>
             </div class="row center">
             <a class="btn-large waves-effect waves-light brown lighten-1" id="create">Join</a>
           </div>
@@ -221,6 +221,7 @@
 
 
   <!--  Scripts-->
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
