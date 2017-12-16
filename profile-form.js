@@ -47,7 +47,6 @@ $("#profile-submit").on("click", function () {
             fullStack: false,
             ios: false,
             android: false,
-            otherDev: false,
             otherDevText: "",
         },
         languageType: {
@@ -56,16 +55,14 @@ $("#profile-submit").on("click", function () {
             python: false,
             java: false,
             cSharp: false,
-            otherLang1: false,
             otherLangText1: "",
-            otherLang2: false,
             otherLangText2: "",
         },
         collabType: {
             beMentor: false,
             haveMentor: false,
             meetCoder: false,
-            collabProj: false,
+            collabProj: "",
         },
         gitHub: "",
         linkedIn: "",
@@ -182,12 +179,9 @@ $("#profile-submit").on("click", function () {
         var userAndroid = newUser.platformType.android = false;
         console.log("android: ", newUser.platformType.android);
     };
-    // To de-bug "Other" entries. console.log("New User: ", newUser);
-    if ($("#other-dev").is(':checked')) {
-        // newUser.platformType.otherDev = true;
-        var userOtherPlat = newUser.platformType.otherDevText = $("#other-dev-text").val().trim();
-        console.log("OtherPlatform: ", newUser.platformType.otherDevText);
-    };
+    
+    // var userOtherDevText = $("#other-dev-text").val().trim();
+    // newUser.otherDevText = userOtherDevText;
 
     // languageType
     if ($("#html-css").is(':checked')) {
@@ -232,14 +226,11 @@ $("#profile-submit").on("click", function () {
         var userPhp = newUser.languageType.php = false;
         console.log("php: ", newUser.languageType.php);
     };
-    if ($("#other-lang1").is(':checked')) {
-        var userLang1 = newUser.languageType.otherLang1 = $("#other-lang1-text").val().trim();
-        console.log("OtherLang1: ", languageType.otherLang1);
-    };
-    if ($("#other-lang2").is(':checked')) {
-        var userLang2 = newUser.languageType.otherLang2 = $("#other-lang2-text").val().trim();
-        console.log("OtherLang2: ", languageType.otherLang2);
-    };
+
+    // var userLangText1 = $("#other-lang-text1").val().trim();
+    // newUser.otherLangText1 = userLangText1;
+    // var userLangText2 = $("#other-lang-text2").val().trim();
+    // newUser.otherLangText2 = userLangText2;
 
     // collabType
     if ($("#be-mentor").is(':checked')) {
@@ -263,13 +254,8 @@ $("#profile-submit").on("click", function () {
         var userMeetCoder = newUser.collabType.meetCoder = false;
         console.log("meet a coder: ", newUser.collabType.meetCoder);
     };
-    if ($("#collab-proj").is(':checked')) {
-        var userCollabProj = newUser.collabType.collabProj = true;
-        console.log("collab proj: ", newUser.collabType.collabProj);
-    } else {
-        var userCollabProj = newUser.collabType.collabProj = false;
-        console.log("collab proj: ", newUser.collabType.collabProj);
-    };
+    // var userCollabProj = $("#collab-proj-text").val().trim();
+    // newUser.collabProj = userCollabProj;
 
     // Profiles
     var userGithub = $("#git-hub").val().trim();
@@ -318,19 +304,19 @@ var newProfile = {
     userFull: userFull,
     userIos: userIos,
     userAndroid: userAndroid,
-    // userOtherPlat: userOtherPlat,
+    // userOtherDevText: userOtherDevText,
     userHtml: userHtml,
     userJsjq: userJsjq,
     userPython: userPython,
     userJava: userJava,
     userCplus: userCplus,
     userPhp: userPhp,
-    // userLang1: userLang1,
-    // userLang2: userLang2,
+    // userLangText1: userLangText1,
+    // userLangText2: userLangText2,
     userBeMentor: userBeMentor,
     userHaveMentor: userHaveMentor,
     userMeetCoder: userMeetCoder,
-    userCollabProj: userCollabProj,
+    // userCollabProj: userCollabProj,
     userGithub: userGithub,
     userLinkedIn: userLinkedIn,
     userOtherProfile: userOtherProfile,
@@ -379,19 +365,19 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
     var profileFull = currentProfile.userFull;
     var profileIos = currentProfile.userIos;
     var profileAndroid = currentProfile.userAndroid;
-    // // userOtherPlat: userOtherPlat,
+    // var porfileOtherDevText = currentProfile.userOtherDevText;
     var profileHtml = currentProfile.userHtml;
     var profileJsjq = currentProfile.userJsjq;
     var profilePython = currentProfile.userPython;
     var profileJava = currentProfile.userJava;
     var profileCplus = currentProfile.userCplus;
     var profilePhp = currentProfile.userPhp;
-    // // userLang1: userLang1,
-    // // userLang2: userLang2,
+    // var profileLangText1 = currentProfile.userLangText1;
+    // var profileLangText2 = currentProfile.userLangText2;
     var profileBeMentor = currentProfile.userBeMentor;
     var profileHaveMentor = currentProfile.userHaveMentor;
     var profileMeetCoder = currentProfile.userMeetCoder;
-    var profileCollabProj = currentProfile.userCollabProj;
+    // var profileCollabProj = currentProfile.userCollabProj;
     var profileGithub = currentProfile.userGithub;
     var profileLinkedIn = currentProfile.userLinkedIn;
     var profileOtherProfile = currentProfile.userOtherProfile;
@@ -405,6 +391,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
     console.log("Profile Local: ", profileLocal);
     console.log("Profile LocalVir: ", profileLocalVir);
     console.log("Profile Virtual: ", profileVirtual);
+    // console.log("OtherDevText: ", profileOtherDevText);
 
 
 // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.

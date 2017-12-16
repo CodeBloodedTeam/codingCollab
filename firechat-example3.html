@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <!-- Firechat -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+</head>
+
+<body>
+
+    <div><button id="start-chat-button">Start Chat</button></div>
+    <div id="firechat-wrapper"></div>
+
+    <script>
+        //Get Firebase Config to connect, find users and store chat data. (Set limit in Firebase to clear chat data after a period of time.)
+        var config = {
+            apiKey: "AIzaSyAkrlcozQa4UQ74mF_PwbvppuHjPW5B7f8",
+            authDomain: "codingcollab-1512956831401.firebaseapp.com",
+            databaseURL: "https://codingcollab-1512956831401.firebaseio.com",
+            projectId: "codingcollab-1512956831401",
+            storageBucket: "codingcollab-1512956831401.appspot.com",
+            messagingSenderId: "177469015452"
+        };
+
+        //Initialize Firebase
+        firebase.initializeApp(config);
+
+// 1. User clicks a Start Chat button/link next to the profile match they want to connect with.
+        $("#start-chat-button").on("click", function (event) {
+            console.log("Start Chat button clicked");
+            
+// 2. Basic message window pops up in the main profile section of the page.
+    // Firechat "room" should automatically be created. Create a room:
+    // https://stackoverflow.com/questions/35170970/how-to-properly-use-the-createroom-function-and-callback-in-firechat
+    // Firechat.createRoom(roomName, roomType, callback(roomId))
+    // Firebase fetches the selected user "match" and places the match into the specified chat room. Do we want a limit?
+    // Firechat.getUsersByRoom(roomId, [limit=100], callback)
+        
+
+      });
+    
+
+// 3. Chat is initiated.
+    // Creating Firechat instance
+    var chatRef = firebase.database().ref();
+    var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            // If the user is logged in, set them as the Firechat user
+            chat.setUser(user.uid, "Anonymous" + user.uid.substr(10, 8));
+        } else {
+            // If the user is not logged in, sign them in anonymously
+            firebase.auth().signInAnonymously().catch(function (error) {
+                console.log("Error signing user in anonymously:", error);
+            });
+        }
+    });
+
+    
+
+    </script>
+
+</body>
+</html>
