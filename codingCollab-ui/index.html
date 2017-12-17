@@ -13,191 +13,569 @@
 </head>
 
 <body>
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="index.html" class="brand-logo">Coding Collab</a>
+  <div id="home-page">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo">Coding Collab</a>
 
-      <ul class="right hide-on-med-and-down">
-        <li>
-          <a href="#" id="login">Login / Sign-up</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <ul id="slide-out" class="side-nav">
-    <li>
-      <div class="container" id="login-sign-up">
-        <h5>Existing User Login</h5>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="#" id="login">Login / Sign-up</a>
+          </li>
+        </ul>
       </div>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="existing-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
-              <label for="existing-user-email">Email</label>
+    </nav>
+
+    <ul id="slide-out" class="side-nav">
+      <li>
+        <div class="container" id="login-sign-up">
+          <h5>Existing User Login</h5>
+        </div>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="existing-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
+                <label for="existing-user-email">Email</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="existing-user-password" type="tel" class="validate" required>
+                <label for="existing-user-password">Password</label>
+              </div class="row center">
+              <a class="btn-large waves-effect waves-light brown lighten-1" id="login-btn">Login</a>
             </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">lock</i>
-              <input id="existing-user-password" type="tel" class="validate" required>
-              <label for="existing-user-password">Password</label>
-            </div class="row center">
-            <a class="btn-large waves-effect waves-light brown lighten-1" id="login-btn">Login</a>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
 
-    </li>
-    <li>
-      <div class="container">
-        <h5>New User Sign-up</h5>
-      </div>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="new-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
-              <label for="new-user-email">
-                <b>Email</b>
-              </label>
+      </li>
+      <li>
+        <div class="container">
+          <h5>New User Sign-up</h5>
+        </div>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="new-user-email" type="text" data-error="wrong" data-success="right" class="validate" required>
+                <label for="new-user-email">
+                  <b>Email</b>
+                </label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="new-user-password" type="tel" class="validate" required>
+                <label for="new-user-password">Password</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="icon_lock new-user-password" type="tel" class="validate" required>
+                <label for="icon_lock new-user-password">Repeat Password</label>
+              </div class="row center">
+              <a class="btn-large waves-effect waves-light brown lighten-1" id="create-btn">Join</a>
             </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">lock</i>
-              <input id="new-user-password" type="tel" class="validate" required>
-              <label for="new-user-password">Password</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">lock</i>
-              <input id="icon_lock new-user-password" type="tel" class="validate" required>
-              <label for="icon_lock new-user-password">Repeat Password</label>
-            </div class="row center">
-            <a class="btn-large waves-effect waves-light brown lighten-1" id="create-btn">Join</a>
-          </div>
-        </form>
-      </div>
-    </li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse">
-  </a>
-
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br>
-        <br>
-        <h1 class="header center black-text text-lighten-2" id="main-header">Coders, unite!</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">By connecting coders with one another, Coding Collab creates a customized community of support.</h5>
+          </form>
         </div>
-        <div class="row center">
-          <a id="get-started" class="btn-large waves-effect waves-light brown lighten-1">Get Started</a>
-        </div>
-        <br>
-        <br>
+      </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse">
+    </a>
 
-      </div>
-    </div>
-    <div class="parallax">
-      <img src="extras/pexels-photo-398532.jpg" alt="All hands in the center" style="width:400px;height:700px;">
-    </div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-      <!--   Icon Section   -->
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text">
-              <i class="material-icons">flash_on</i>
-            </h2>
-            <h5 class="center">Get Connected</h5>
-
-            <p class="light">We get it, your preferences vary. Complete your Coding Collab profile to tell us what you love, hate, and hope
-              to gain on your coding journey. We'll match you to other coders based on shared interests and goals.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text">
-              <i class="material-icons">group</i>
-            </h2>
-            <h5 class="center">Find Your Tribe</h5>
-
-            <p class="light">Whether you're a student, a self-taught pro, or a total newbie, Coding Collab can help you chat with other coders
-              just like you. We want people on all levels to feel included. Don't worry, we aren't going to match you based
-              on your friends' friends and we also aren't going to limit your matches if you've never launched an app.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text">
-              <i class="material-icons">settings</i>
-            </h2>
-            <h5 class="center">Think Outside The Box</h5>
-
-            <p class="light">Coding Collab offers developers a virtual community designed to expand your resources beyond textbooks and local
-              tutors. We give you the option to find coders both locally and virtually, increasing opportunities for mentorship
-              or collaboration.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h4 class="header col s12 black-text light">Meet coders with common interests</h4>
-        </div>
-      </div>
-    </div>
-    <div class="parallax">
-      <img src="extras/people-office-group-team.jpg" alt="Two people sitting and working together" style="width:300px;height:800px;">
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3>
-            <i class="mdi-content-send brown-text"></i>
-          </h3>
-          <h4>Together Is Better</h4>
-          <p class="center-align light">At Coding Collab we believe that teamwork makes the dream work.
-            <br>We know you can find the resources to figure it out on your own, but you don't have to!
-            <br>What are you waiting for? Create your profile and start connecting today.</p>
+    <div id="index-banner" class="parallax-container">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <br>
+          <br>
+          <h1 class="header center black-text text-lighten-2" id="main-header">Coders, unite!</h1>
           <div class="row center">
-            <a id="join-now" class="btn-large waves-effect waves-light brown lighten-1">Join Now</a>
+            <h5 class="header col s12 light">By connecting coders with one another, Coding Collab creates a customized community of support.</h5>
+          </div>
+          <div class="row center">
+            <a id="get-started" class="btn-large waves-effect waves-light brown lighten-1">Get Started</a>
+          </div>
+          <br>
+          <br>
+
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="extras/pexels-photo-398532.jpg" alt="All hands in the center" style="width:400px;height:700px;">
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text">
+                <i class="material-icons">flash_on</i>
+              </h2>
+              <h5 class="center">Get Connected</h5>
+
+              <p class="light">We get it, your preferences vary. Complete your Coding Collab profile to tell us what you love, hate, and hope
+                to gain on your coding journey. We'll match you to other coders based on shared interests and goals.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text">
+                <i class="material-icons">group</i>
+              </h2>
+              <h5 class="center">Find Your Tribe</h5>
+
+              <p class="light">Whether you're a student, a self-taught pro, or a total newbie, Coding Collab can help you chat with other
+                coders just like you. We want people on all levels to feel included. Don't worry, we aren't going to match
+                you based on your friends' friends and we also aren't going to limit your matches if you've never launched
+                an app.</p>
+            </div>
+          </div>
+
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text">
+                <i class="material-icons">settings</i>
+              </h2>
+              <h5 class="center">Think Outside The Box</h5>
+
+              <p class="light">Coding Collab offers developers a virtual community designed to expand your resources beyond textbooks and
+                local tutors. We give you the option to find coders both locally and virtually, increasing opportunities
+                for mentorship or collaboration.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="parallax-container valign-wrapper">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h4 class="header col s12 black-text light">Meet coders with common interests</h4>
+          </div>
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="extras/people-office-group-team.jpg" alt="Two people sitting and working together" style="width:300px;height:800px;">
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="section">
+
+        <div class="row">
+          <div class="col s12 center">
+            <h3>
+              <i class="mdi-content-send brown-text"></i>
+            </h3>
+            <h4>Together Is Better</h4>
+            <p class="center-align light">At Coding Collab we believe that teamwork makes the dream work.
+              <br>We know you can find the resources to figure it out on your own, but you don't have to!
+              <br>What are you waiting for? Create your profile and start connecting today.</p>
+            <div class="row center">
+              <a id="join-now" class="btn-large waves-effect waves-light brown lighten-1">Join Now</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="parallax-container valign-wrapper">
+      <div class="section no-pad-bot">
+        <div class="container">
+          <div class="row center">
+            <h4 class="header col s12 light">Discover a unique way to grow as a developer</h4>
+          </div>
+        </div>
+      </div>
+      <div class="parallax">
+        <img src="extras/pexels-photo-247819.jpg" alt="Scrabble letters displaying LEARN" style="width:300px;height:800px;">
+      </div>
+    </div>
+  </div>
+
+  <div id="user-home-page">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="../index.html" class="brand-logo">Coding Collab</a>
+
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="#">Matches</a>
+          </li>
+          <li>
+            <a href="#">Locations</a>
+          </li>
+          <li>
+            <a href="#">Resources</a>
+          </li>
+          <li>
+            <a href="../index.html" id="logout-btn">Sign-out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="icon-block">
+          <h2 class="center brown-text">
+            <img src="extras/user-1633249_640.png" alt="User Profile Avatar" style="width:100px;height:100px;">
+          </h2>
+          <h5 class="center black-text">
+            <i>Hello</i>
+          </h5>
+          <h4 class="center blue-text">Your Display Name</h4>
+
+          <!-- Modal Trigger -->
+          <div class="row center">
+            <a class="waves-effect waves-light blue lighten-2 btn modal-trigger" href="#modal1">Edit Profile</a>
+          </div>
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <h4>Edit Your Profile</h4>
+              <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input placeholder="This is a required field to be matched with other members." id="display-name" type="text" class="validate">
+                      <label for="display-name">Display Name *</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input placeholder="Not required to get matched; you can always choose to collaborate virtually!" id="add-address" type="text"
+                        class="validate">
+                      <label for="add-address">Street Address</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input placeholder="Orlando, FL" id="add-city" type="text" class="validate">
+                      <label for="add-city">City, State</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input placeholder="Used to display resources and matches in your area." id="add-zip" type="text" class="validate">
+                      <label for="add-zip">Zip Code</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <h5>I prefer to connect:</h5>
+                    </div>
+                    <div class="col s4" id="connect-local">
+                      <ul>
+                        <li>Locally and in person.</li>
+                        <li>
+                          <div class="switch">
+                            <label>
+                              No
+                              <input type="checkbox">
+                              <span class="lever"></span>
+                              Yes
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col s4" id="connect-loc-vir">
+                      <ul>
+                        <li>Virtually but only locally.</li>
+                        <li>
+                          <div class="switch">
+                            <label>
+                              No
+                              <input type="checkbox">
+                              <span class="lever"></span>
+                              Yes
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col s4" id="connect-vir">
+                      <ul>
+                        <li>Virtually from anywhere.</li>
+                        <li>
+                          <div class="switch">
+                            <label>
+                              No
+                              <input type="checkbox">
+                              <span class="lever"></span>
+                              Yes
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <h5>Experience Level (select all that apply):</h5>
+                    </div>
+                    <div class="col s12">
+                      <form action="#">
+                        <p>
+                          <input type="checkbox" id="exp-beg-self" />
+                          <label for="exp-beg-self">Beginner: Self-Taught</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="exp-beg-stud" />
+                          <label for="exp-beg-stud">Beginner: Student (ex. Bootcamp, Tech School, College)</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="exp-int" />
+                          <label for="exp-int">Intermediate (ex. Junior Developer)</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="exp-adv" />
+                          <label for="exp-adv">Advanced (ex. Senior Developer)</label>
+                        </p>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col s12">
+                      <h5>I am interested in developing:</h5>
+                    </div>
+                    <div class="col s12">
+                      <form action="#">
+                        <p>
+                          <input type="checkbox" id="front-end" />
+                          <label for="front-end">Front-End</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="back-end" />
+                          <label for="back-end">Back-End</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="full-stack" />
+                          <label for="full-stack">Full Stack</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="ios" />
+                          <label for="ios">iOS</label>
+                        </p>
+                        <p>
+                          <input type="checkbox" id="android" />
+                          <label for="android">Android</label>
+                        </p>
+                        <div class="input-field inline">
+                          <input id="other-dev" type="email" class="validate">
+                          <label for="other-dev" data-error="wrong" data-success="right">Other:</label>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="row">
+                      <div class="col s12">
+                        <h5>Coding Languages I know or want to learn:</h5>
+                      </div>
+                      <div class="col s12">
+                        <form action="#">
+                          <p>
+                            <input type="checkbox" id="html-css" />
+                            <label for="html-css">HTML/CSS</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="js-jq" />
+                            <label for="js-jq">Javascript/jQuery</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="python" />
+                            <label for="python">Python</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="java" />
+                            <label for="java">Java</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="c-plus" />
+                            <label for="c-plus">C++</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="php" />
+                            <label for="php">PHP</label>
+                          </p>
+                          <div class="input-field inline">
+                            <input id="other-lang1" type="email" class="validate">
+                            <label for="other-lang1" data-error="wrong" data-success="right">Other:</label>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div class="row">
+                        <div class="col s12">
+                          <h5>I want to use Coding Collab to:</h5>
+                        </div>
+                        <div class="col s12">
+                          <form action="#">
+                            <p>
+                              <input type="checkbox" id="be-mentor" />
+                              <label for="be-mentor">Be a mentor</label>
+                            </p>
+                            <p>
+                              <input type="checkbox" id="have-mentor" />
+                              <label for="have-mentor">Have a mentor</label>
+                            </p>
+                            <p>
+                              <input type="checkbox" id="meet-coder" />
+                              <label for="meet-coder">Meet people with common coding interests.</label>
+                            </p>
+                            <p>
+                              <input type="checkbox" id="collab-proj" />
+                              <label for="collab-proj">Collaborate on a specific project or idea</label>
+                            </p>
+                            <div class="input-field inline">
+                              <input id="collab-proj" type="email" class="validate">
+                              <label for="collab-proj" data-error="wrong" data-success="right">Tell us about it</label>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col s12">
+                          <h5>More Ways To Connect With You:</h5>
+                        </div>
+                        <form>
+                          <div class="col s12 input-field inline">
+                            <input id="git-hub" type="email" class="validate">
+                            <label for="git-hub" data-error="wrong" data-success="right">GitHub Profile:</label>
+                          </div>
+                          <div class="col s12 input-field inline">
+                            <input id="link-in" type="email" class="validate">
+                            <label for="link-in" data-error="wrong" data-success="right">Linked-In Profile:</label>
+                          </div>
+                          <div class="col s12 input-field inline">
+                            <input id="other-prof" type="email" class="validate">
+                            <label for="other-prof" data-error="wrong" data-success="right">Other:</label>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div class="row">
+                        <div class="col s12">
+                          <h5>Information kept private and never shared.</h5>
+                          <p>Your username, password, email address, and street address will never be shared with other Coding
+                            Collab members. If you receive requests from other coders to connect, if will be using the internal
+                            messaging service provided.
+                          </p>
+                          <p>Other profile information, including your location may be publicly viewable to other members based
+                            on the answers you provided on your profile form.
+                          </p>
+                        </div>
+                        <form action="#">
+                          <p>
+                            <input type="checkbox" id="i-agree" />
+                            <label for="i-agree">I agree that other Coding Collab members can contact me for collaboration opportunities via chat.
+                              *</label>
+                          </p>
+                          <p>
+                            <input type="checkbox" id="i-am-18" />
+                            <label for="i-am-18">I certify that I am at least 18 years old. *</label>
+                          </p>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="profile-submit">Save</a>
+            </div>
+          </div>
+          <div class="row center" id="prof-display">
+            <p>New User? Edit your Profile to see your details appear here!</p>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <div class="col s12 m3">
+        <div class="row">
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
 
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
 
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h4 class="header col s12 light">Discover a unique way to grow as a developer</h4>
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
+
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="parallax">
-      <img src="extras/pexels-photo-247819.jpg" alt="Scrabble letters displaying LEARN" style="width:300px;height:800px;">
+
+      <div class="col s12 m3">
+        <div class="row">
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="icon-block">
+            <h2 class="center brown-text">
+              <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+            </h2>
+            <h5 class="center teal-text">Display Name</h5>
+            <p class="center light">Wants to connect locally and virtually
+              <br>Wants to be a mentor</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
