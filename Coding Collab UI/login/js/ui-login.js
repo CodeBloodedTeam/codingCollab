@@ -19,7 +19,7 @@ $(document).ready(function () {
     $("#logout").on("click", function (event) {
         event.preventDefault();
         console.log("LOGOUT button was clicked");
-
+    
         firebase.auth().signOut().then(function () {
             console.log("Logged out!")
         }, function (error) {
