@@ -50,7 +50,7 @@ $("#login-btn").on("click", function (event) {
 });
 
 //Signup a NEW user
-$("#create").on("click", function (event) {
+$("#create-btn").on("click", function (event) {
     event.preventDefault();
     console.log("JOIN button clicked");
     var email = $("#new-user-email").val();
