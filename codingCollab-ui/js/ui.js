@@ -97,6 +97,8 @@ $("#create-btn").on("click", function (event) {
 $("#logout-btn").on("click", function (event) {
     event.preventDefault();
     console.log("LOGOUT button was clicked");
+    $("#home-page").show();
+    $("#user-home-page").hide();
 
     firebase.auth().signOut().then(function () {
         console.log("Logged out!")
