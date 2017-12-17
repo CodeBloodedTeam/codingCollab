@@ -24,7 +24,7 @@ $("#login-btn").on("click", function (event) {
     var password = $("#existing-user-password").val();
     var auth = firebase.auth();
 
-    //Firebase CURRENT user method
+    //Firebase CURRENT user method - If the authentication fails, console.log an error
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -33,13 +33,15 @@ $("#login-btn").on("click", function (event) {
         console.log(error.message);
     });
 
+    //Listens for a change in sign in status
     firebase.auth().onAuthStateChanged(function (user) {
 
         if (user) {
-            console.log("This user is signed in: ", user.email);
+            console.log("This user is signed in: ", user.email, user.uid);
             //NOT SURE IF I NEED THESE
             var displayName = user.displayName;
             var email = user.email;
+            var uid = user.uid;
             $("#home-page").hide();
             $("#user-home-page").show();
 
@@ -60,6 +62,7 @@ $("#create-btn").on("click", function (event) {
     var email = $("#new-user-email").val();
     var password = $("#new-user-password").val();
     var auth = firebase.auth();
+    var uid = user.uid;
     console.log("NEW User email: ", email);
     console.log("NEW User password: ", password);
     console.log("NEW User auth: ", auth);
