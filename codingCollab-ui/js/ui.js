@@ -37,7 +37,7 @@ $("#login-btn").on("click", function (event) {
             //NOT SURE IF I NEED THESE
             var displayName = user.displayName;
             var email = user.email;
-            window.location = '../login/index.html'; //After successful login, user will be redirected to index.html
+            window.location = 'codingCollab/codingCollab-ui/login/index.html'; //After successful login, user will be redirected to index.html
 
         } else {
             console.log("User is logged out.");
