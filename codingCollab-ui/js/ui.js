@@ -1,4 +1,7 @@
 $(document).ready(function () {
+$("#user-home-page").hide();
+$('.modal').modal();
+
 // Code required for authenticating users.
 //Get Firebase Config
 var config = {
@@ -37,7 +40,8 @@ $("#login-btn").on("click", function (event) {
             //NOT SURE IF I NEED THESE
             var displayName = user.displayName;
             var email = user.email;
-            window.location = 'login/index.html'; //After successful login, user will be redirected to index.html
+            $("#home-page").hide();
+            $("#user-home-page").show();
 
         } else {
             console.log("User is logged out.");
@@ -88,6 +92,21 @@ $("#create-btn").on("click", function (event) {
     // Clears all the text boxes
     email = $("#new-user-email").val("");
     password = $("#new-user-password").val("");
+});
+
+$("#logout-btn").on("click", function (event) {
+    event.preventDefault();
+    console.log("LOGOUT button was clicked");
+
+    firebase.auth().signOut().then(function () {
+        console.log("Logged out!")
+    }, function (error) {
+        console.log(error.code);
+        console.log(error.message);
+    });
+    // Clears all the text boxes
+    email = $("#existing-user-email").val("");
+    password = $("#existing-user-password").val("");
 });
 
     $(".button-collapse").sideNav({
