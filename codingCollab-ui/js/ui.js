@@ -78,11 +78,11 @@ $("#create-btn").on("click", function (event) {
         
             if (user) {
                 console.log("This user is signed in: ", user.email);
+                $("#home-page").hide();
+                $("#user-home-page").show();
                //NOT SURE IF I NEED THESE
             // var displayName = user.displayName;
             // var email = user.email;
-            window.location = 'login/index.html'; //After successful login, user will be redirected to modal form .html
-            $('#modal1').modal('open');
 
             } else {
                 console.log("User is logged out.");
