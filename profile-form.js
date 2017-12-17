@@ -28,7 +28,7 @@ $("#profile-submit").on("click", function () {
         name: "",
         address: "",
         city: "",
-        state: "",
+        // state: "",
         zip: "",
         connectMethod: {
             local: false,
@@ -78,14 +78,14 @@ $("#profile-submit").on("click", function () {
     newUser.address = userAddress;
     var userCity = $("#add-city").val().trim();
     newUser.city = userCity;
-    var userState = $("#sel-state").val().trim();
-    newUser.state = userState;
+    // var userState = $("#sel-state").val().trim();
+    // newUser.state = userState;
     var userZip = $("#add-zip").val().trim();
     newUser.zip = userZip;
     console.log("Name: ", newUser.name);
     console.log("Address: ", newUser.address);
     console.log("City: ", newUser.city);
-    console.log("State: ", newUser.state);
+    // console.log("State: ", newUser.state);
     console.log("ZIP: ", newUser.zip);
 
     // connectMethod:
@@ -290,7 +290,7 @@ var newProfile = {
     userName: userName,
     userAddress: userAddress,
     userCity: userCity,
-    userState: userState,
+    // userState: userState,
     userZip: userZip,
     userLocal: userLocal,
     userLocalVir: userLocalVir,
@@ -351,7 +351,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
     var profileName = currentProfile.userName;
     var profileAddress = currentProfile.userAddress;
     var profileCity = currentProfile.userCity;
-    var profileState = currentProfile.userState;
+    // var profileState = currentProfile.userState;
     var profileZip = currentProfile.userZip;
     var profileLocal = currentProfile.userLocal;
     var profileLocalVir = currentProfile.userLocalVir;
