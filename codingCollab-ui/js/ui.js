@@ -77,8 +77,9 @@ $("#create").on("click", function (event) {
                //NOT SURE IF I NEED THESE
             // var displayName = user.displayName;
             // var email = user.email;
-            window.location = 'auth-redirect.html'; //After successful login, user will be redirected to modal form .html
-        
+            window.location = 'login/index.html'; //After successful login, user will be redirected to modal form .html
+            $('#modal1').modal('open');
+
             } else {
                 console.log("User is logged out.");
             }
