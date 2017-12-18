@@ -67,7 +67,7 @@ $(document).ready(function () {
 
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
-        var repeatPassword = $("#icon_lock new-user-password").val();
+        var repeatPassword = $("#repeat-password").val();
         var auth = firebase.auth();
 
         //Firebase NEW user method
@@ -99,7 +99,7 @@ $(document).ready(function () {
         // Clears all the text boxes
         email = $("#new-user-email").val("");
         password = $("#new-user-password").val("");
-        repeatPassword = $("#icon_lock new-user-password").val("");
+        repeatPassword = $("#repeat-password").val("");
     });
 
     $("#logout-btn").on("click", function (event) {
@@ -345,18 +345,18 @@ $(document).ready(function () {
             console.log("I Certify: ", newUser.agreement.iCertify);
         };
 
-    // Push the data to Firebase:
-    database.ref("/Users").child(userID).set(newUser);
-    console.log(newUser);
+        // Push the data to Firebase:
+        database.ref("/Users").child(userID).set(newUser);
+        console.log(newUser);
 
-    // ** MIGHT NOT CLEAR THESE! ** Clear all the text boxes after user clicks Submit:
-    //   name = $("#display-name").val("");
-    //   address = $("#add-address").val("");
-    //   city = $("#add-city").val("");
-    //   state = $("#sel-state").val("");
-    //   zip = $("#add-zip").val("");
-    //   ...
-});
+        // ** MIGHT NOT CLEAR THESE! ** Clear all the text boxes after user clicks Submit:
+        //   name = $("#display-name").val("");
+        //   address = $("#add-address").val("");
+        //   city = $("#add-city").val("");
+        //   state = $("#sel-state").val("");
+        //   zip = $("#add-zip").val("");
+        //   ...
+    });
     // 3. Create Firebase event for adding new profiles to the database as multiple records. Need to use childSnapshot. 
     // // Firebase is always watching for changes to the data.
     // // When changes occurs it will print them to console. This is pulling the Child data which is represented by the new train id number in Firebase.
@@ -405,15 +405,13 @@ $(document).ready(function () {
         console.log("Profile Local: ", profileLocal);
         console.log("Profile LocalVir: ", profileLocalVir);
         console.log("Profile Virtual: ", profileVirtual);
-
-        // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
-
-        $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
-            "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
-            "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
-            "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
-            "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
-            "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
     });
 
+    // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
+    $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
+        "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
+        "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
+        "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
+        "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
+        "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
 });
