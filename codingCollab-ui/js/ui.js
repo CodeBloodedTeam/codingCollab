@@ -73,6 +73,7 @@ $(document).ready(function () {
             
             //Need to add steps to append in the table. Note, most data is "true" or "false". Need to convert to  how text should display
             // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
+
             displayMatches(currentProfile)                
         })
     };
@@ -81,16 +82,19 @@ $(document).ready(function () {
     function displayMatches(currentProfile){
         console.log("Display Matches!")
         database.ref("/Users").on("value", function(snapshot) {
+            var matchedUsers = [];
             allUsers = snapshot.val();
             console.log(allUsers);
             for (key in allUsers){
                 console.log(allUsers[key]);
                 if ((currentProfile.connectMethod.virtual === true) && (allUsers[key].connectMethod.virtual === true)) {
                     console.log("You both want to connect virtually!");
+                    matchedUsers.push(allUsers[key]);
+                    console.log(matchedUsers);
 
                     //Determine what to check, and weight for each.
-                    //If match score is greater than TBD amount, add that matched profile to an array.
-                    //Iterate through the array and display the chosen data for each matchObject, up to 6.
+                    //If match score is greater than TBD amount, add that matched profile to a matchedUsers array.
+                    //Iterate through the array and display the chosen data for each matchObject in the Dom, up to 6 matches.
 
                 }
             }
