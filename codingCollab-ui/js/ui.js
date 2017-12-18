@@ -3,7 +3,7 @@ $(document).ready(function () {
     $("#locations-page").hide();
     $('.modal').modal();
 
-    // Code required for authenticating users.
+    
     //Get Firebase Config
     var config = {
         apiKey: "AIzaSyAkrlcozQa4UQ74mF_PwbvppuHjPW5B7f8",
@@ -14,9 +14,17 @@ $(document).ready(function () {
         messagingSenderId: "177469015452"
     };
 
-    //GLOBAL VARIABLES AND FUNCTIONS
-    var userID;
+
+    //Initialize Firebase
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+//GLOBAL VARIABLES AND FUNCTIONS
+  
     var allUsers;
+    var users = []; //May not be needed
+    var userCount = 1; //May not be needed
+
 
     function displayProfile(userKey) {
         console.log("display profile!")
@@ -103,14 +111,12 @@ $(document).ready(function () {
     };
 
 
-    //Initialize Firebase
-    firebase.initializeApp(config);
-
-    //Login an EXISTING user
+//Login an EXISTING user - When login button is clicked:
     $("#login-btn").on("click", function (event) {
         event.preventDefault();
         console.log("LOGIN button clicked");
 
+        //Store users information
         var email = $("#existing-user-email").val();
         var password = $("#existing-user-password").val();
         var auth = firebase.auth();
@@ -124,21 +130,19 @@ $(document).ready(function () {
             console.log(error.code);
             console.log(error.message);
         });
-
+        //Listen for users state to change (sign-in vs signed out)
         firebase.auth().onAuthStateChanged(function (user) {
 
-            if (user) { //If user is logged in
+            if (user) { //If user is signed in, store data and display user home page
                 console.log("This user is signed in: ", user.email);
-                //NOT SURE IF I NEED THESE
-                var displayName = user.displayName;
                 var email = user.email;
-                userID = user.uid;
+                var userID = user.uid;
                 console.log(email, userID)
                 $("#home-page").hide();
                 $("#user-home-page").show();
                 $("#locations-page").hide();
 
-                //Call function displayProfile - to be defined
+                //Call function displayProfile with userID as argument - defined above
                 displayProfile(userID)
             } else {
                 console.log("User is logged out.");
@@ -150,7 +154,7 @@ $(document).ready(function () {
         password = $("#existing-user-password").val("");
     });
 
-    //Signup a NEW user
+//Signup a NEW user - when the join button is clicked
     $("#create-btn").on("click", function (event) {
         event.preventDefault();
         $("#home-page").hide();
@@ -162,6 +166,8 @@ $(document).ready(function () {
         var password = $("#new-user-password").val();
         var repeatPassword = $("#repeat-password").val();
         var auth = firebase.auth();
+
+        console.log(email, password, repeatPassword);
 
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
@@ -176,14 +182,16 @@ $(document).ready(function () {
         firebase.auth().onAuthStateChanged(function (user) {
 
             if (user) {
+                console.log(user); //This is not logging the correct person
                 console.log("This user is signed in: ", user.email);
-                var displayName = user.displayName;
                 var email = user.email;
-                userID = user.uid;
+                var userID = user.uid;
                 console.log("NEW User email: ", email);
                 console.log("NEW User password: ", password);
                 console.log("NEW User auth: ", auth);
                 console.log("NEW User Id: ", userID);
+
+
             } else {
                 console.log("User is logged out.");
             }
@@ -195,6 +203,7 @@ $(document).ready(function () {
         repeatPassword = $("#repeat-password").val("");
     });
 
+//Logout current user - when logout button is clicked
     $("#logout-btn").on("click", function (event) {
         event.preventDefault();
         console.log("LOGOUT button was clicked");
@@ -213,6 +222,7 @@ $(document).ready(function () {
         password = $("#existing-user-password").val("");
     });
 
+//Side bar functionality
     $(".button-collapse").sideNav({
         menuWidth: 300, // Default is 300
         edge: 'right', // Choose the horizontal origin
@@ -232,18 +242,15 @@ $(document).ready(function () {
         $('.button-collapse').sideNav('show');
     });
 
-    var database = firebase.database();
+//USER HOME PAGE / PROFILE
 
-    var users = [];
-    var userCount = 1;
-
-    // 2. Create the on-click function that triggers the Submit of new user inputs. This function sends the inputs to Firebase using .push.
+    // When user submits or edits profile and clicks submit
     $("#profile-submit").on("click", function () {
 
         // Prevents the page from refreshing.
         event.preventDefault();
 
-        // Gets the inputs from the form:
+        // Placeholder object - Will be updated with the inputs from the form:
         var newUser = {
             name: "",
             address: "",
@@ -292,6 +299,8 @@ $(document).ready(function () {
                 iCertify: false,
             },
         };
+        
+        //Capture user inputs and update newUser object with new values
         var userName = $("#display-name").val().trim();
         newUser.name = userName;
         var userAddress = $("#add-address").val().trim();
@@ -439,7 +448,7 @@ $(document).ready(function () {
             console.log("I Certify: ", newUser.agreement.iCertify);
         };
 
-        // Push the data to Firebase:
+        // Push the data to Firebase - create Users child with userID as name, and newUser object as value
         database.ref("/Users").child(userID).set(newUser);
         console.log(newUser);
 
@@ -510,13 +519,14 @@ $(document).ready(function () {
     // });
 
 
+    //When the locations link is clicked: 
     $("#locations-link").on("click", function (event) {
         event.preventDefault();
         $("#home-page").hide();
         $("#user-home-page").hide();
         $("#locations-page").show();
 
-        // <script async defer src=>
+        // Loads Google maps and google places APIs=>
         function loadScript() {
             var myKey = "AIzaSyBe-zoP-oMRoBbGvHbH1q7hpNX4swuSI_4";
             var script = document.createElement('script');
@@ -525,21 +535,21 @@ $(document).ready(function () {
             document.body.appendChild(script);
         }
         loadScript();
+    });
 
-        function displayLocations(locationObject) {
-            var name = locationObject.name;
-            var address = locationObject.vicinity;
-            var hours = locationObject.opening_hours.weekday_text;
-            var rating = locationObject.rating;
+    var map;
+    
+    //Loads map centered on Orlando
+    window.initMap = function() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+                lat: 28.538336,
+                lng: -81.379234
+            },
+            zoom: 12
+        });
 
-
-            console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.weekday_text,
-                locationObject.opening_hours.open_now, locationObject.rating)
-            $("table > tbody").append(
-                `<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
-
-        }
-
+        //Google place IDs for top study locations
         var studyLocations = [
             "ChIJ0XspYxh554gRocPv5I_Kpm8",
             "ChIJu8iKN_x654gRTwmd9gWtGOU",
@@ -551,42 +561,47 @@ $(document).ready(function () {
             "ChIJC99qTMtn54gRtlbMV-DDSJY",
             "ChIJ0ctB7cV654gRxMBMcdr9AN0",
             "ChIJGwBhSMV654gR0W59VlLMV2w"
-        ]
+        ]; 
 
-        var map;
+        var service = new google.maps.places.PlacesService(map);
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: {
-                    lat: 28.538336,
-                    lng: -81.379234
-                },
-                zoom: 12
+        //For each study location in array, make all call to google places API to get addiional details and dispaly a marker and info window (on click) at the long/lat
+        studyLocations.forEach(function (item, index, array) {
+            service.getDetails({
+                placeId: item
+            }, function (place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    console.log(place);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+
+                    var infowindow = new google.maps.InfoWindow();
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent(`<div><strong>${place.name}</strong></div>`);
+                        infowindow.open(map, this);
+                    });
+                    displayLocations(place);
+                }
             });
+        });
+    };
 
-            var service = new google.maps.places.PlacesService(map);
+    //For each study location, append the place data to the DOM via table
+    function displayLocations(locationObject) {
+        var name = locationObject.name;
+        var address = locationObject.vicinity;
+        var hours = locationObject.opening_hours.weekday_text;
+        var rating = locationObject.rating;
 
-            studyLocations.forEach(function (item, index, array) {
-                service.getDetails({
-                    placeId: item
-                }, function (place, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(place);
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: place.geometry.location
-                        });
 
-                        var infowindow = new google.maps.InfoWindow();
+        console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.weekday_text,
+            locationObject.opening_hours.open_now, locationObject.rating)
+        $("table > tbody").append(
+            `<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
 
-                        google.maps.event.addListener(marker, 'click', function () {
-                            infowindow.setContent(`<div><strong>${place.name}</strong></div>`);
-                            infowindow.open(map, this);
-                        });
-                        displayLocations(place);
-                    }
-                });
-            });
-        }
-    });
+    };
+
 });
