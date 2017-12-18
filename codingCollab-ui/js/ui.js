@@ -15,8 +15,8 @@ $(document).ready(function () {
 
     //GLOBAL VARIABLES AND FUNCTIONS
     var userID;
+    var allUsers;
 
-    
 
     function displayProfile(userKey){
         console.log("display profile!")
@@ -75,14 +75,27 @@ $(document).ready(function () {
             // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
             displayMatches(currentProfile)                
         })
-    }
+    };
 
-    function displayMatches(){
-        
+    //Function to compare current user to all existing users
+    function displayMatches(currentProfile){
+        console.log("Display Matches!")
+        database.ref("/Users").on("value", function(snapshot) {
+            allUsers = snapshot.val();
+            console.log(allUsers);
+            for (key in allUsers){
+                console.log(allUsers[key]);
+                if ((currentProfile.connectMethod.virtual === true) && (allUsers[key].connectMethod.virtual === true)) {
+                    console.log("You both want to connect virtually!");
 
+                    //Determine what to check, and weight for each.
+                    //If match score is greater than TBD amount, add that matched profile to an array.
+                    //Iterate through the array and display the chosen data for each matchObject, up to 6.
 
-
-    }
+                }
+            }
+        })
+    };
 
 
     //Initialize Firebase
