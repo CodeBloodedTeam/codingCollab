@@ -12,6 +12,7 @@
             box-sizing: border-box;
         }
 
+        #locations-page,
         #map {
             height: 100%;
             width: 100%;
@@ -32,23 +33,20 @@
             height: 70%;
             width: 100%;
         }
-
-
     </style>
 </head>
 
 <body>
-    <h1>Places to Collaborate</h1>
-
-    <div id="searchPrompt">
+    <div id="locations-page">
+    <div class="row" id="searchPrompt">
         <h2>Check out some great places to code and collab!</h2>
     </div>
 
-    <div id="mapContainer">
+    <div class="row" id="mapContainer">
         <div id="map"></div>
     </div>
 
-    <div id="locationsDiv">
+    <div class="row" id="locationsDiv">
         <table>
             <thead>
                 <tr>
@@ -58,12 +56,9 @@
                     <th>Rating</th>
                 </tr>
             </thead>
-            <tbody>
-
-
-
-            </tbody>
+            <tbody></tbody>
         </table>
+    </div>
     </div>
 
     <!-- jQuery -->
@@ -131,8 +126,10 @@
             var rating = locationObject.rating;
 
 
-            console.log(locationObject.name, locationObject.formatted_address,  locationObject.opening_hours.weekday_text, locationObject.opening_hours.open_now, locationObject.rating)
-            $("table > tbody").append(`<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
+            console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.weekday_text,
+                locationObject.opening_hours.open_now, locationObject.rating)
+            $("table > tbody").append(
+                `<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
 
         }
     </script>
