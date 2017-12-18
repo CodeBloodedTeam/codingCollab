@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#user-home-page").hide();
+    $("#locations-page").hide();
     $('.modal').modal();
 
     // Code required for authenticating users.
@@ -17,20 +18,20 @@ $(document).ready(function () {
     var userID;
     var allUsers;
 
-
-    function displayProfile(userKey){
+    function displayProfile(userKey) {
         console.log("display profile!")
-        
-        database.ref("/Users").child(userKey).on("value", function(snapshot) {
+
+        database.ref("/Users").child(userKey).on("value", function (snapshot) {
+            var database = firebase.database();
 
             console.log(snapshot.val());
             var currentProfile = snapshot.val();
-           
+
             //Save all information from user profile into a variable for reference
-            var profileName = currentProfile.name; 
+            var profileName = currentProfile.name;
             var profileAddress = currentProfile.address;
-            var profileCity = currentProfile.city; 
-            var profileZip = currentProfile.zip; 
+            var profileCity = currentProfile.city;
+            var profileZip = currentProfile.zip;
             console.log(profileName, profileAddress, profileCity, profileZip)
 
             var profileLocal = currentProfile.connectMethod.local;
@@ -57,35 +58,35 @@ $(document).ready(function () {
             var profileJava = currentProfile.languageType.java;
             var profileCplus = currentProfile.languageType.cSharp;
             console.log(profileHtml, profileJsjq, profilePython, profileJava, profileCplus)
-            
+
             var profileBeMentor = currentProfile.collabType.beMentor;
             var profileHaveMentor = currentProfile.collabType.haveMentor;
             var profileMeetCoder = currentProfile.collabType.meetCoder;
             console.log(profileBeMentor, profileHaveMentor, profileMeetCoder);
-            
+
             var profileGithub = currentProfile.gitHub;
             var profileLinkedIn = currentProfile.linkedIn;
             var profileOtherProfile = currentProfile.otherProfile;
             var profileIagree = currentProfile.agreement.iAgree;
             var profileIcertify = currentProfile.agreement.iCertify;
-    
+
             console.log(profileGithub, profileLinkedIn, profileOtherProfile, profileIagree, profileIcertify);
-            
+
             //Need to add steps to append in the table. Note, most data is "true" or "false". Need to convert to  how text should display
             // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
 
-            displayMatches(currentProfile)                
+            displayMatches(currentProfile)
         })
     };
 
     //Function to compare current user to all existing users
-    function displayMatches(currentProfile){
+    function displayMatches(currentProfile) {
         console.log("Display Matches!")
-        database.ref("/Users").on("value", function(snapshot) {
+        database.ref("/Users").on("value", function (snapshot) {
             var matchedUsers = [];
             allUsers = snapshot.val();
             console.log(allUsers);
-            for (key in allUsers){
+            for (key in allUsers) {
                 console.log(allUsers[key]);
                 if ((currentProfile.connectMethod.virtual === true) && (allUsers[key].connectMethod.virtual === true)) {
                     console.log("You both want to connect virtually!");
@@ -126,7 +127,7 @@ $(document).ready(function () {
 
         firebase.auth().onAuthStateChanged(function (user) {
 
-            if (user) {//If user is logged in
+            if (user) { //If user is logged in
                 console.log("This user is signed in: ", user.email);
                 //NOT SURE IF I NEED THESE
                 var displayName = user.displayName;
@@ -135,7 +136,8 @@ $(document).ready(function () {
                 console.log(email, userID)
                 $("#home-page").hide();
                 $("#user-home-page").show();
-                
+                $("#locations-page").hide();
+
                 //Call function displayProfile - to be defined
                 displayProfile(userID)
             } else {
@@ -153,6 +155,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("#home-page").hide();
         $("#user-home-page").show();
+        $("#locations-page").hide();
         console.log("JOIN button clicked");
 
         var email = $("#new-user-email").val();
@@ -197,6 +200,7 @@ $(document).ready(function () {
         console.log("LOGOUT button was clicked");
         $("#home-page").show();
         $("#user-home-page").hide();
+        $("#locations-page").hide();
 
         firebase.auth().signOut().then(function () {
             console.log("Logged out!")
@@ -450,60 +454,139 @@ $(document).ready(function () {
     // 3. Create Firebase event for adding new profiles to the database as multiple records. Need to use childSnapshot. 
     // // Firebase is always watching for changes to the data.
     // // When changes occurs it will print them to console. This is pulling the Child data which is represented by the new train id number in Firebase.
-    database.ref("/Users").on("child_added", function (childSnapshot, prevChildKey) {
+    // database.ref("/Users").on("child_added", function (childSnapshot, prevChildKey) {
 
-        // Print the initial data to the console.
-        console.log("Child Log: ", childSnapshot.val());
+    //     // Print the initial data to the console.
+    //     console.log("Child Log: ", childSnapshot.val());
 
-        // Store everything in a new variable
-        var currentProfile = childSnapshot.val();
-        var profileName = currentProfile.userName;
-        var profileAddress = currentProfile.userAddress;
-        var profileCity = currentProfile.userCity;
-        var profileZip = currentProfile.userZip;
-        var profileLocal = currentProfile.userLocal;
-        var profileLocalVir = currentProfile.userLocalVir;
-        var profileVirtual = currentProfile.userVirtual;
-        var profileBeginSelf = currentProfile.userBeginSelf;
-        var profileBeginStudy = currentProfile.userBeginStudy;
-        var profileInter = currentProfile.userInter;
-        var profileAdv = currentProfile.userAdv;
-        var profileFront = currentProfile.userFront;
-        var profileBack = currentProfile.userBack;
-        var profileFull = currentProfile.userFull;
-        var profileIos = currentProfile.userIos;
-        var profileAndroid = currentProfile.userAndroid;
-        var profileHtml = currentProfile.userHtml;
-        var profileJsjq = currentProfile.userJsjq;
-        var profilePython = currentProfile.userPython;
-        var profileJava = currentProfile.userJava;
-        var profileCplus = currentProfile.userCplus;
-        var profilePhp = currentProfile.userPhp;
-        var profileBeMentor = currentProfile.userBeMentor;
-        var profileHaveMentor = currentProfile.userHaveMentor;
-        var profileMeetCoder = currentProfile.userMeetCoder;
-        var profileGithub = currentProfile.userGithub;
-        var profileLinkedIn = currentProfile.userLinkedIn;
-        var profileOtherProfile = currentProfile.userOtherProfile;
-        var profileIagree = currentProfile.userIagree;
-        var profileIcertify = currentProfile.userIcertify;
+    //     // Store everything in a new variable
+    //     var currentProfile = childSnapshot.val();
+    //     var profileName = currentProfile.userName;
+    //     var profileAddress = currentProfile.userAddress;
+    //     var profileCity = currentProfile.userCity;
+    //     var profileZip = currentProfile.userZip;
+    //     var profileLocal = currentProfile.userLocal;
+    //     var profileLocalVir = currentProfile.userLocalVir;
+    //     var profileVirtual = currentProfile.userVirtual;
+    //     var profileBeginSelf = currentProfile.userBeginSelf;
+    //     var profileBeginStudy = currentProfile.userBeginStudy;
+    //     var profileInter = currentProfile.userInter;
+    //     var profileAdv = currentProfile.userAdv;
+    //     var profileFront = currentProfile.userFront;
+    //     var profileBack = currentProfile.userBack;
+    //     var profileFull = currentProfile.userFull;
+    //     var profileIos = currentProfile.userIos;
+    //     var profileAndroid = currentProfile.userAndroid;
+    //     var profileHtml = currentProfile.userHtml;
+    //     var profileJsjq = currentProfile.userJsjq;
+    //     var profilePython = currentProfile.userPython;
+    //     var profileJava = currentProfile.userJava;
+    //     var profileCplus = currentProfile.userCplus;
+    //     var profilePhp = currentProfile.userPhp;
+    //     var profileBeMentor = currentProfile.userBeMentor;
+    //     var profileHaveMentor = currentProfile.userHaveMentor;
+    //     var profileMeetCoder = currentProfile.userMeetCoder;
+    //     var profileGithub = currentProfile.userGithub;
+    //     var profileLinkedIn = currentProfile.userLinkedIn;
+    //     var profileOtherProfile = currentProfile.userOtherProfile;
+    //     var profileIagree = currentProfile.userIagree;
+    //     var profileIcertify = currentProfile.userIcertify;
 
-        console.log("Profile Name: ", profileName);
-        console.log("Profile Address: ", profileAddress);
-        console.log("Profile City: ", profileCity);
-        console.log("Profile Zip: ", profileZip);
-        console.log("Profile Local: ", profileLocal);
-        console.log("Profile LocalVir: ", profileLocalVir);
-        console.log("Profile Virtual: ", profileVirtual);
+    //     console.log("Profile Name: ", profileName);
+    //     console.log("Profile Address: ", profileAddress);
+    //     console.log("Profile City: ", profileCity);
+    //     console.log("Profile Zip: ", profileZip);
+    //     console.log("Profile Local: ", profileLocal);
+    //     console.log("Profile LocalVir: ", profileLocalVir);
+    //     console.log("Profile Virtual: ", profileVirtual);
 
-        // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
-        $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
-        "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
-        "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
-        "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
-        "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
-        "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
+    //     // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
+    //     $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
+    //         "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
+    //         "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
+    //         "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
+    //         "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
+    //         "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
+    // });
+
+
+    $("#locations-link").on("click", function (event) {
+        event.preventDefault();
+        $("#home-page").hide();
+        $("#user-home-page").hide();
+        $("#locations-page").show();
+
+        // <script async defer src=>
+        function loadScript() {
+            var myKey = "AIzaSyBe-zoP-oMRoBbGvHbH1q7hpNX4swuSI_4";
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "https://maps.googleapis.com/maps/api/js?key=" + myKey + "&libraries=places&callback=initMap";
+            document.body.appendChild(script);
+        }
+        loadScript();
+
+        function displayLocations(locationObject) {
+            var name = locationObject.name;
+            var address = locationObject.vicinity;
+            var hours = locationObject.opening_hours.weekday_text;
+            var rating = locationObject.rating;
+
+
+            console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.weekday_text,
+                locationObject.opening_hours.open_now, locationObject.rating)
+            $("table > tbody").append(
+                `<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
+
+        }
+
+        var studyLocations = [
+            "ChIJ0XspYxh554gRocPv5I_Kpm8",
+            "ChIJu8iKN_x654gRTwmd9gWtGOU",
+            "ChIJ_R3H1WZ654gR4pxbRDOomyY",
+            "ChIJYbI5wzp554gRqxMJA_4M4_s",
+            "ChIJkxKmNSp_54gRR9FoPq3FKfw",
+            "ChIJKVxLkxVl54gRt2oJxMj55PI",
+            "ChIJSfDF0dNn54gRT6ZhphMmEyU",
+            "ChIJC99qTMtn54gRtlbMV-DDSJY",
+            "ChIJ0ctB7cV654gRxMBMcdr9AN0",
+            "ChIJGwBhSMV654gR0W59VlLMV2w"
+        ]
+
+        var map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 28.538336,
+                    lng: -81.379234
+                },
+                zoom: 12
+            });
+
+            var service = new google.maps.places.PlacesService(map);
+
+            studyLocations.forEach(function (item, index, array) {
+                service.getDetails({
+                    placeId: item
+                }, function (place, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        console.log(place);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location
+                        });
+
+                        var infowindow = new google.maps.InfoWindow();
+
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.setContent(`<div><strong>${place.name}</strong></div>`);
+                            infowindow.open(map, this);
+                        });
+                        displayLocations(place);
+                    }
+                });
+            });
+        }
     });
-
-
 });
