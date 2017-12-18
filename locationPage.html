@@ -8,15 +8,14 @@
     <meta charset="UTF-8">
 
     <style>
-        
-        *{
-            box-sizing:border-box;
+        * {
+            box-sizing: border-box;
         }
+
         #map {
             height: 100%;
-            width:100%;
-            margin:auto;
-            
+            width: 100%;
+            margin: auto;
         }
 
         html,
@@ -24,237 +23,99 @@
             height: 100%;
         }
 
-        #searchPrompt{
-            float:left;
-            width:30%;
+        #searchPrompt {
+
+            width: 100%;
         }
 
-        #mapContainer{
-            height:70%;
-            width: 70%;
-            padding:5px;
-            float:right;
+        #mapContainer {
+            height: 70%;
+            width: 100%;
         }
-
     </style>
 </head>
 
 <body>
-    <h1>Return Places</h1>
-    
-    <div id = "searchPrompt">
-        <h2>enter your zip code below to find the best places to code!</h2>
-        <input id="zipCode" type="textbox" placeholder="32811">
-        <input id="submitBtn" type="button" value="Search">
+    <h1>Places to Collaborate</h1>
 
-
+    <div id="searchPrompt">
+        <h2>Check out some great places to code and collab!</h2>
     </div>
-    <div id = "mapContainer">
+
+    <div id="mapContainer">
         <div id="map"></div>
+    </div>
+
+    <div id="locationsDiv">
+
     </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
 
     <script>
-
         var studyLocations = [
-            {name: "Orlando Public Library",
-            placeID: "ChIJu8iKN_x654gRTwmd9gWtGOU" 
-            }]
+            "ChIJ0XspYxh554gRocPv5I_Kpm8",
+            "ChIJu8iKN_x654gRTwmd9gWtGOU",
+            "ChIJ_R3H1WZ654gR4pxbRDOomyY",
+            "ChIJYbI5wzp554gRqxMJA_4M4_s",
+            "ChIJkxKmNSp_54gRR9FoPq3FKfw",
+            "ChIJKVxLkxVl54gRt2oJxMj55PI",
+            "ChIJSfDF0dNn54gRT6ZhphMmEyU",
+            "ChIJC99qTMtn54gRtlbMV-DDSJY",
+            "ChIJ0ctB7cV654gRxMBMcdr9AN0",
+            "ChIJGwBhSMV654gR0W59VlLMV2w"
+        ]
 
-        //User enters zip code and hits search
-function initMap (){ 
-    //    $("#submitBtn").on("click", function(){  
-    //         console.log("Submit!")
-    //         var userZip = $("#zipCode").val().trim();
+        var map;
 
-    //         //convert zipcode to long/lat
 
-    //         var geocoder = new google.maps.Geocoder();
+        function initMap() {
 
-    //         geocoder.geocode({"address":userZip}, function(results, status){
-    //             if (status == "OK"){
-    //                 console.log(results)
-    //                 var location = {
-    //                     long: results[0].geometry.bounds.b.b,
-    //                     lat: results[0].geometry.bounds.f.f
-    //                 }
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: 28.520773,
+                    lng: -81.4592984
+                },
+                zoom: 12
+            });
 
-    //             console.log (location.long, location.lat);
+            var service = new google.maps.places.PlacesService(map);
 
-                
-    
-    
-                studyLocations.forEach(function(item, element, array){
-                //Place a call for information:
-                console.log(item.name)
-                
-                var service = new google.maps.places.PlacesService();
-                var request = {query:  item.name};
-                service.textSearch(request, callback);
+            studyLocations.forEach(function (item, index, array) {
+                service.getDetails({
+                    placeId: item
+                }, function (place, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        console.log(place);
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location
+                        });
 
-                function callback()
-                             
-                
-                
-                console.log(request);
+                        var infowindow = new google.maps.InfoWindow();
 
-                var service = new google.maps.places.PlacesService();
-                service.getDetails(request, callback);
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.setContent(`<div><strong>${place.name}</strong></div>`);
+                            infowindow.open(map, this);
+                        });
 
-                function callback(place, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(place.name);
+                        displayLocations(place)
+
                     }
-                }
-
+                })
             })
-            //     }
-              
 
-            // });
+        }
 
+        function displayLocations(locationObject) {
+            console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.open_now, locationObject.rating)
+            // $("#locationsDiv")
 
-
-           
-
-
-    //    })
-    }
-        
-        
-
-        //For each item in the locations array (curated list):
-            //If the distance between userLocation and study Point < 40 miles
-
-                //Run a call to get more information on that place
-
-                //Select desired data from results, and save in a local object
-            
-                //Push each of the results objects into an array
-
-        //If matching location array length is 0:
-            //Display a message that the there are currently no collab places available
-        
-        //else: Display the place info (loop through array and append to the DOM):
-            //Place Name, 
-            //Place Address
-            //Google Rating?
-            //Picture?
-
-                
-
-//GLOBAL Variables
-//     var studyPlaces = ["ChIJu8iKN_x654gRTwmd9gWtGOU"]
-
-//     var map;
-//     var searchPlace;
-//     var infoWindow;
-//     var marker;
-    
-        
-// //When the page loads, run the following to generate a map focused on Valencia
-
-//     function initMap() {
-//         console.log("Initial Map has loaded")
-        
-//         var defaultAddress = {lat: 28.520778, lng: -81.459317}; //Valencia West address
-//         map = new google.maps.Map(document.getElementById('map'), {
-//             center: defaultAddress,
-//             zoom: 15
-//         });
-  
-//     //Listen for a the submit button
-//         $("#submitPlace").on("click", function(){
-//             searchPlace = $("#newPlace").val().trim(); 
-//             console.log("New place entered: " + searchPlace)
-
-//             //Save Geocoder object to variable and call the geocodeAddress function
-//             var geocoder = new google.maps.Geocoder();
-//             geocodeAddress(geocoder, map);
-
-//         });
-    
-//     };
-
-//     //Called when user submits a place
-//     function geocodeAddress(geocoder, resultsMap){
-//         console.log("geocodeAddress function!")
-
-//         //Sends a geocode request to convert userAddress into longitude and latitude
-//         geocoder.geocode({'address':"Orlando, FL"}, function(results, status) {
-//             if (status === 'OK') {
-
-//             //Save the first long/lat from  geocode results for  reference                  
-//             var searchLocation = results[0].geometry.location;
-//             console.log("searchLocation: " + searchLocation);
-            
-//             //Set the paramters to find businesses near the searchLocation; 
-//             var request = {location: searchLocation, radius:'5000', name: searchPlace};
-
-//             //Save PlacesServices object as a variable; make request for nearby businesses; default returns 20 results
-//             var service = new google.maps.places.PlacesService(resultsMap);
-//             service.nearbySearch(request, callback); //Will run the callback function then return here to finish the function
-               
-//             resultsMap.setCenter(searchLocation) //Set the center of the map to the be the location of the first geocode result
-
-//             };
-
-//         });
-//             //Add else (meaning it's not a valid address and determine what to do)
-//     };
-
-//     function callback(results, status) {
-//         console.log("Nearby search call function!");
-           
-//            console.log(results);
-//         if (status === google.maps.places.PlacesServiceStatus.OK) { //If a the request for nearby places is successful 
-//             console.log("Results inside the callback: ");
-//             console.log(results);
-
-//             // results.forEach(function(element, index, array){
-//             //     var locationName = `<strong><a class='placeName' href='#'>${element.name}</a><strong>`
-//             //     var infowindow = new google.maps.InfoWindow({
-//             //         content: locationName});
-
-//             //     var placeLoc = element.geometry.location;
-                
-//             //     var marker = new google.maps.Marker({
-//             //         map: map,
-//             //         position: element.geometry.location
-//             //     });
-
-//             //     marker.addListener('click', function() {
-//             //         infowindow.open(map, marker);
-                
-//             //     });
-                
-//             //     $(".placeName").on("click", function(){
-                    
-
-//             //     })
-                
-                
-//             // })
-//         }
-//     }
-          
-
-    
-// //Things to figure out/add:
-//         //How to do autocomplete in the search
-//         //Clear the search results
-//         //Add infoWIndow for each search results
-//         //Determine how to make map show hte best view (i.e. determine radius, zoom)
-//         //Send a more information request for location based on the click
-//         //Display results of clicked marker in a div
-//         //How to add a rating for a place
-//         //How to display the ratings from all users
-    
-
-//     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe-zoP-oMRoBbGvHbH1q7hpNX4swuSI_4&libraries=places&callback=initMap" async defer></script>
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe-zoP-oMRoBbGvHbH1q7hpNX4swuSI_4&libraries=places&callback=initMap"
+        async defer></script>
 
 </body>
 
