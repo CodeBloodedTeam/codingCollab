@@ -48,10 +48,6 @@ $(document).ready(function () {
                 console.log(email, userID)
                 $("#home-page").hide();
                 $("#user-home-page").show();
-
-
-
-
             } else {
                 console.log("User is logged out.");
             }
@@ -65,7 +61,10 @@ $(document).ready(function () {
     //Signup a NEW user
     $("#create-btn").on("click", function (event) {
         event.preventDefault();
+        $("#home-page").hide();
+        $("#user-home-page").show();
         console.log("JOIN button clicked");
+        
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
         var auth = firebase.auth();
@@ -90,9 +89,6 @@ $(document).ready(function () {
 
             if (user) {
                 console.log("This user is signed in: ", user.email);
-                $("#home-page").hide();
-                $("#user-home-page").show();
-
             } else {
                 console.log("User is logged out.");
             }
