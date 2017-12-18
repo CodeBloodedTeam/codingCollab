@@ -77,6 +77,7 @@ $(document).ready(function () {
             var profileOtherProfile = currentProfile.otherProfile;
             var profileIagree = currentProfile.agreement.iAgree;
             var profileIcertify = currentProfile.agreement.iCertify;
+            var profileMatchSchore = currentProfile.matchscore;
 
             console.log(profileGithub, profileLinkedIn, profileOtherProfile, profileIagree, profileIcertify);
 
@@ -93,23 +94,58 @@ $(document).ready(function () {
         database.ref("/Users").on("value", function (snapshot) {
             var matchedUsers = [];
             allUsers = snapshot.val();
+            console.log("Current User Connect Methods: ");
+            console.log(currentProfile.connectMethod.local, currentProfile.connectMethod.localVir, currentProfile.connectMethod.virtual);
+            console.log("-----------------------------------------");
             console.log(allUsers);
             for (key in allUsers) {
                 console.log(allUsers[key]);
-                if ((currentProfile.connectMethod.virtual === true) && (allUsers[key].connectMethod.virtual === true)) {
-                    console.log("You both want to connect virtually!");
-                    matchedUsers.push(allUsers[key]);
-                    console.log(matchedUsers);
+                allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
+                
+                //If the current user's email matches an existing user's email (same user), do nothing
+                if (currentProfile.name === allUsers[key].name){
+                    console.log("same user, don't compare") //Using name for now. Will need to get a unique identifier
+                } else {                 
+                //Compare connection method, increase match score if the same:
+                   
+                    console.log("Existing User Connect Methods: ");
+                    console.log(allUsers[key].connectMethod.local, allUsers[key].connectMethod.localVir, allUsers[key].connectMethod.virtual);
+                    
+                    if (currentProfile.connectMethod.local && allUsers[key].connectMethod.local) { // && allUsers[key].connectMethod.local) {
+                        console.log(`Both you and ${allUsers[key].name} want to connect locally!`);
+                        //if (users location is 50 miles or less from existing user)
+                                //you both want to connect locally, and you're in the same area
+                                 //Increase match score
+                    }else{
+                        
+                        console.log("One or both of you do not want to meet locally");
+                    };
+                    if (currentProfile.connectMethod.localVir && allUsers[key].connectMethod.localVir) {
+                        console.log("You both want to connect locally & virtually!");
+                        //if (users location is 50 miles or less from existing user)
+                                //you both want to connect virtually & locally, and you're in the same area!
+                                 //Increase match score
 
-                    //Determine what to check, and weight for each.
-                    //If match score is greater than TBD amount, add that matched profile to a matchedUsers array.
-                    //Iterate through the array and display the chosen data for each matchObject in the Dom, up to 6 matches.
+                    };
+                    if (currentProfile.connectMethod.virtual&& allUsers[key].connectMethod.virtual) {
+                        console.log("You both want to connect virtually!");
+                        //Increase match score
+                    };
+                //Compare Interests
+                    
 
+
+
+                            //Matching Steps (General)
+                        //Determine what to check, and weight for each.
+                        //If match score is greater than TBD amount, add that matched profile to a matchedUsers array.
+                        //Iterate through the array and display the chosen data for each matchObject in the Dom, up to 6 matches.
+
+                    }
                 }
-            }
-        })
-    };
-
+            })
+        };
+    
 
 //Login an EXISTING user - When login button is clicked:
     $("#login-btn").on("click", function (event) {
@@ -298,6 +334,7 @@ $(document).ready(function () {
                 iAgree: false,
                 iCertify: false,
             },
+            matchScore: 0,
         };
         
         //Capture user inputs and update newUser object with new values
@@ -307,6 +344,8 @@ $(document).ready(function () {
         newUser.address = userAddress;
         var userCity = $("#add-city").val().trim();
         newUser.city = userCity;
+
+
         var userZip = $("#add-zip").val().trim();
         newUser.zip = userZip;
         console.log("Name: ", newUser.name);
