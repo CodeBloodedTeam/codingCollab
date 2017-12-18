@@ -67,8 +67,8 @@ $(document).ready(function () {
 
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
+        var repeatPassword = $("#icon_lock new-user-password").val();
         var auth = firebase.auth();
-        var repeatpassword = $("#repeat-password").val();
 
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
@@ -99,10 +99,10 @@ $(document).ready(function () {
         // Clears all the text boxes
         email = $("#new-user-email").val("");
         password = $("#new-user-password").val("");
+        repeatPassword = $("#icon_lock new-user-password").val("");
     });
 
     $("#logout-btn").on("click", function (event) {
-        repeatpassword = $("#repeat-password").val("");
         event.preventDefault();
         console.log("LOGOUT button was clicked");
         $("#home-page").show();
