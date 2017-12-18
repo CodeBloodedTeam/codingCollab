@@ -64,7 +64,7 @@ $(document).ready(function () {
             var profileJsjq = currentProfile.languageType.jsJq;
             var profilePython = currentProfile.languageType.python;
             var profileJava = currentProfile.languageType.java;
-            var profileCplus = currentProfile.languageType.cSharp;
+            var profileCplus = currentProfile.languageType.cPlus;
             console.log(profileHtml, profileJsjq, profilePython, profileJava, profileCplus)
 
             var profileBeMentor = currentProfile.collabType.beMentor;
@@ -97,7 +97,12 @@ $(document).ready(function () {
             console.log("Current User Connect Methods: ");
             console.log(currentProfile.connectMethod.local, currentProfile.connectMethod.localVir, currentProfile.connectMethod.virtual);
             console.log("-----------------------------------------");
-            console.log(allUsers);
+            
+            console.log("Current User Interests: ");
+            console.log(currentProfile.platformType.frontEnd, currentProfile.platformType.backEnd, currentProfile.platformType.fullStack, currentProfile.platformType.ios, currentProfile.platformType.android);
+            console.log("-----------------------------------------");
+                      
+           
             for (key in allUsers) {
                 console.log(allUsers[key]);
                 allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
@@ -105,10 +110,12 @@ $(document).ready(function () {
                 //If the current user's email matches an existing user's email (same user), do nothing
                 if (currentProfile.name === allUsers[key].name){
                     console.log("same user, don't compare") //Using name for now. Will need to get a unique identifier
+               
                 } else {                 
-                //Compare connection method, increase match score if the same:
+               
+                //COMPARE CONNECTION METHOD - current user vs. other users
                    
-                    console.log("Existing User Connect Methods: ");
+                    console.log("CONNECT METHODS - EXISTING USERS: ");
                     console.log(allUsers[key].connectMethod.local, allUsers[key].connectMethod.localVir, allUsers[key].connectMethod.virtual);
                     
                     if (currentProfile.connectMethod.local && allUsers[key].connectMethod.local) { // && allUsers[key].connectMethod.local) {
@@ -127,11 +134,64 @@ $(document).ready(function () {
                                  //Increase match score
 
                     };
-                    if (currentProfile.connectMethod.virtual&& allUsers[key].connectMethod.virtual) {
+                    if (currentProfile.connectMethod.virtual && allUsers[key].connectMethod.virtual) {
                         console.log("You both want to connect virtually!");
                         //Increase match score
                     };
-                //Compare Interests
+
+                //COMPARE PLATFORM - current user vs. other users
+                 
+                console.log("PLATFORM INTERESTS - EXISTING USERS: ");
+                console.log(allUsers[key].platformType.frontEnd, allUsers[key].platformType.backEnd, allUsers[key].platformType.fullStack, allUsers[key].platformType.ios, allUsers[key].platformType.android);
+
+                    if (currentProfile.platformType.frontEnd && allUsers[key].platformType.frontEnd) {
+                        console.log("You both are interested in front end development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
+                        console.log("You both are interested in backend development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
+                        console.log("You both are interested in fullstack development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
+                        console.log("You both are interested in developing iOS apps!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.android && allUsers[key].platformType.android) {
+                        console.log("You both are interested in developing android apps!");
+                        //Increase match score
+                    }; 
+
+                    //COMPARE Language - current user vs. other users - Left off here
+                    console.log("LANGUAGES - EXISTING USERS: ");
+                    console.log(allUsers[key].languageType.jsJq, allUsers[key].languageType.python, allUsers[key].languageType.java, allUsers[key].languageType.htmlCss, allUsers[key].languageType.htmlCss);
+    
+                    if (currentProfile.platformType.frontEnd && allUsers[key].platformType.frontEnd) {
+                        console.log("You both are interested in front end development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
+                        console.log("You both are interested in backend development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
+                        console.log("You both are interested in fullstack development!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
+                        console.log("You both are interested in developing iOS apps!");
+                        //Increase match score
+                    };
+                    if (currentProfile.platformType.android && allUsers[key].platformType.android) {
+                        console.log("You both are interested in developing android apps!");
+                        //Increase match score
+                    }; 
+
+                
+
                     
 
 
@@ -317,7 +377,7 @@ $(document).ready(function () {
                 jsJq: false,
                 python: false,
                 java: false,
-                cSharp: false,
+                cPlus: false,
                 otherLangText1: "",
                 otherLangText2: "",
             },
@@ -438,8 +498,8 @@ $(document).ready(function () {
         };
 
         if ($("#c-plus").is(':checked')) {
-            newUser.languageType.cSharp = true;
-            console.log("c++: ", newUser.languageType.cSharp);
+            newUser.languageType.cPlus = true;
+            console.log("c++: ", newUser.languageType.cPlus);
         };
 
         if ($("#php").is(':checked')) {
@@ -529,7 +589,7 @@ $(document).ready(function () {
     //     var profileJsjq = currentProfile.userJsjq;
     //     var profilePython = currentProfile.userPython;
     //     var profileJava = currentProfile.userJava;
-    //     var profileCplus = currentProfile.userCplus;
+    //     var profilecPlus = currentProfile.usercPlus;
     //     var profilePhp = currentProfile.userPhp;
     //     var profileBeMentor = currentProfile.userBeMentor;
     //     var profileHaveMentor = currentProfile.userHaveMentor;
