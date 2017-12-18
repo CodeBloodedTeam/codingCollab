@@ -68,7 +68,7 @@ $(document).ready(function () {
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
         var auth = firebase.auth();
-        var userID = user.uid;
+        userID = user.uid;
         console.log("NEW User email: ", email);
         console.log("NEW User password: ", password);
         console.log("NEW User auth: ", auth);
