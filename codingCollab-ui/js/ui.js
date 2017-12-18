@@ -68,12 +68,6 @@ $(document).ready(function () {
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
         var auth = firebase.auth();
-        // userID = user.uid;
-
-        console.log("NEW User email: ", email);
-        console.log("NEW User password: ", password);
-        console.log("NEW User auth: ", auth);
-        console.log("NEW User Id: ", userID);
 
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
@@ -92,7 +86,10 @@ $(document).ready(function () {
                 var displayName = user.displayName;
                 var email = user.email;
                 userID = user.uid;
-                console.log(email, userID)
+                console.log("NEW User email: ", email);
+                console.log("NEW User password: ", password);
+                console.log("NEW User auth: ", auth);
+                console.log("NEW User Id: ", userID);
             } else {
                 console.log("User is logged out.");
             }
