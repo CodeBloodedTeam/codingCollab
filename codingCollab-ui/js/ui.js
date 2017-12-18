@@ -13,12 +13,82 @@ $(document).ready(function () {
         messagingSenderId: "177469015452"
     };
 
+    //GLOBAL VARIABLES AND FUNCTIONS
     var userID;
+
+    
+
+    function displayProfile(userKey){
+        console.log("display profile!")
+        
+        database.ref("/Users").child(userKey).on("value", function(snapshot) {
+
+            console.log(snapshot.val());
+            var currentProfile = snapshot.val();
+           
+            //Save all information from user profile into a variable for reference
+            var profileName = currentProfile.name; 
+            var profileAddress = currentProfile.address;
+            var profileCity = currentProfile.city; 
+            var profileZip = currentProfile.zip; 
+            console.log(profileName, profileAddress, profileCity, profileZip)
+
+            var profileLocal = currentProfile.connectMethod.local;
+            var profileLocalVir = currentProfile.connectMethod.localVir;
+            var profileVirtual = currentProfile.connectMethod.virtual;
+            console.log(profileLocal, profileLocalVir, profileVirtual)
+
+            var profileBeginSelf = currentProfile.experienceLev.expBeginSelf;
+            var profileBeginStudy = currentProfile.experienceLev.expBeginStudy;
+            var profileInter = currentProfile.experienceLev.expInt;
+            var profileAdv = currentProfile.experienceLev.expAdv;
+            console.log(profileBeginSelf, profileBeginStudy, profileInter, profileAdv)
+
+            var profileFront = currentProfile.platformType.frontEnd;
+            var profileBack = currentProfile.platformType.backEnd;
+            var profileFull = currentProfile.platformType.fullStack;
+            var profileIos = currentProfile.platformType.ios;
+            var profileAndroid = currentProfile.platformType.android;
+            console.log(profileFront, profileBack, profileFull, profileIos, profileAndroid)
+
+            var profileHtml = currentProfile.languageType.htmlCss;
+            var profileJsjq = currentProfile.languageType.jsJq;
+            var profilePython = currentProfile.languageType.python;
+            var profileJava = currentProfile.languageType.java;
+            var profileCplus = currentProfile.languageType.cSharp;
+            console.log(profileHtml, profileJsjq, profilePython, profileJava, profileCplus)
+            
+            var profileBeMentor = currentProfile.collabType.beMentor;
+            var profileHaveMentor = currentProfile.collabType.haveMentor;
+            var profileMeetCoder = currentProfile.collabType.meetCoder;
+            console.log(profileBeMentor, profileHaveMentor, profileMeetCoder);
+            
+            var profileGithub = currentProfile.gitHub;
+            var profileLinkedIn = currentProfile.linkedIn;
+            var profileOtherProfile = currentProfile.otherProfile;
+            var profileIagree = currentProfile.agreement.iAgree;
+            var profileIcertify = currentProfile.agreement.iCertify;
+    
+            console.log(profileGithub, profileLinkedIn, profileOtherProfile, profileIagree, profileIcertify);
+            
+            //Need to add steps to append in the table. Note, most data is "true" or "false". Need to convert to  how text should display
+            // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
+            displayMatches(currentProfile)                
+        })
+    }
+
+    function displayMatches(){
+        
+
+
+
+    }
+
 
     //Initialize Firebase
     firebase.initializeApp(config);
 
-    //Login a CURRENT user
+    //Login an EXISTING user
     $("#login-btn").on("click", function (event) {
         event.preventDefault();
         console.log("LOGIN button clicked");
@@ -28,7 +98,7 @@ $(document).ready(function () {
         var auth = firebase.auth();
 
 
-        //Firebase CURRENT user method
+        //Firebase CURRENT user method - Confirms email and password are correct or returns error message
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -39,7 +109,7 @@ $(document).ready(function () {
 
         firebase.auth().onAuthStateChanged(function (user) {
 
-            if (user) {
+            if (user) {//If user is logged in
                 console.log("This user is signed in: ", user.email);
                 //NOT SURE IF I NEED THESE
                 var displayName = user.displayName;
@@ -48,6 +118,9 @@ $(document).ready(function () {
                 console.log(email, userID)
                 $("#home-page").hide();
                 $("#user-home-page").show();
+                
+                //Call function displayProfile - to be defined
+                displayProfile(userID)
             } else {
                 console.log("User is logged out.");
             }
@@ -405,13 +478,15 @@ $(document).ready(function () {
         console.log("Profile Local: ", profileLocal);
         console.log("Profile LocalVir: ", profileLocalVir);
         console.log("Profile Virtual: ", profileVirtual);
-    });
 
-    // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
-    $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
+        // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
+        $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
         "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
         "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
         "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
         "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
         "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
+    });
+
+
 });
