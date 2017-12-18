@@ -64,11 +64,11 @@ $(document).ready(function () {
         $("#home-page").hide();
         $("#user-home-page").show();
         console.log("JOIN button clicked");
-        
+
         var email = $("#new-user-email").val();
         var password = $("#new-user-password").val();
         var auth = firebase.auth();
-        var repeatpassword = $("#icon_lock new-user-password").val();
+        var repeatpassword = $("#repeat-password").val();
 
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
@@ -102,7 +102,7 @@ $(document).ready(function () {
     });
 
     $("#logout-btn").on("click", function (event) {
-        repeatpassword = $("#icon_lock new-user-password").val("");
+        repeatpassword = $("#repeat-password").val("");
         event.preventDefault();
         console.log("LOGOUT button was clicked");
         $("#home-page").show();
@@ -345,20 +345,18 @@ $(document).ready(function () {
             console.log("I Certify: ", newUser.agreement.iCertify);
         };
 
-        console.log(newUser);
+    // Push the data to Firebase:
+    database.ref("/Users").child(userID).set(newUser);
+    console.log(newUser);
 
-        // Push the data to Firebase:
-        database.ref("/Users").child(userID).set(newUser);
-
-        // ** MIGHT NOT CLEAR THESE! ** Clear all the text boxes after user clicks Submit:
-        //   name = $("#display-name").val("");
-        //   address = $("#add-address").val("");
-        //   city = $("#add-city").val("");
-        //   state = $("#sel-state").val("");
-        //   zip = $("#add-zip").val("");
-        //   ...
-    });
-
+    // ** MIGHT NOT CLEAR THESE! ** Clear all the text boxes after user clicks Submit:
+    //   name = $("#display-name").val("");
+    //   address = $("#add-address").val("");
+    //   city = $("#add-city").val("");
+    //   state = $("#sel-state").val("");
+    //   zip = $("#add-zip").val("");
+    //   ...
+});
     // 3. Create Firebase event for adding new profiles to the database as multiple records. Need to use childSnapshot. 
     // // Firebase is always watching for changes to the data.
     // // When changes occurs it will print them to console. This is pulling the Child data which is represented by the new train id number in Firebase.
@@ -417,4 +415,5 @@ $(document).ready(function () {
             "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
             "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
     });
+
 });
