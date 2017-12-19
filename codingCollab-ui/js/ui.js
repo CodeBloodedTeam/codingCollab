@@ -89,10 +89,10 @@ $(document).ready(function () {
     };
 
     //Function to compare current user to all existing users
-    function displayMatches(currentProfile) {
-        console.log("Display Matches!")
+    function determineMatches(currentProfile) {
+        console.log("Determine Matches!")
         database.ref("/Users").on("value", function (snapshot) {
-            var matchedUsers = [];
+            var matchedUsersArray = [];
             allUsers = snapshot.val();
             console.log("Current User Connect Methods: ");
             console.log(currentProfile.connectMethod.local, currentProfile.connectMethod.localVir, currentProfile.connectMethod.virtual);
@@ -247,20 +247,31 @@ $(document).ready(function () {
                     
                     };
                     console.log(currentProfile.name +  "has a matchScore of " + allUsers[key].matchScore + "with" + allUsers[key].name);               
+                    
                     if (allUsers[key].matchScore > 20){
                         var matchedUser = allUsers[key];
-                        matchedUsers.push(matchedUser); //Save a copy of the matched user in an array
-                        console.log(matchedUsers);
-                        //Call another function to create a div, and display certain data from the matchedUser object in the DOM
-                    }
-
-                        //Iterate through the array and display the chosen data for each matchObject in the Dom, up to 6 matches.
+                        matchedUsersArray.push(matchedUser); //Save a copy of the matched user in an array
+                        console.log("Array before calling display matches function:" + matchedUsersArray);                      
 
                     }
-                }
+
+                       
+
+                    }
+                } //End of for loop
+            
+            //Pass all the matched users into an array
+            displayMatches(matchedUsersArray);
+
             })
         };
-    
+
+    function displayMatches(arrayOfUserObjects){
+        console.log("displayMatches function!")
+        console.log("Array of matched User Objects (inside display matches function):");
+        console.log(arrayOfUserObjects);
+    };
+   
 
 //Login an EXISTING user - When login button is clicked:
     $("#login-btn").on("click", function (event) {
