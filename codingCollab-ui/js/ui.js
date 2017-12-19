@@ -3,7 +3,6 @@ $(document).ready(function () {
     $("#locations-page").hide();
     $('.modal').modal();
 
-
     //Get Firebase Config
     var config = {
         apiKey: "AIzaSyAkrlcozQa4UQ74mF_PwbvppuHjPW5B7f8",
@@ -32,6 +31,7 @@ $(document).ready(function () {
         console.log(userKey);
         database.ref("/Users").child(userKey).on("value", function(snapshot) {
             
+            //Capture snapshot of logged in user's profile and save in object
             console.log(snapshot.val());
             var currentProfile = snapshot.val();
 
@@ -40,37 +40,31 @@ $(document).ready(function () {
             var profileAddress = currentProfile.address;
             var profileCity = currentProfile.city;
             var profileZip = currentProfile.zip;
-            console.log(profileName, profileAddress, profileCity, profileZip)
 
             var profileLocal = currentProfile.connectMethod.local;
             var profileLocalVir = currentProfile.connectMethod.localVir;
             var profileVirtual = currentProfile.connectMethod.virtual;
-            console.log(profileLocal, profileLocalVir, profileVirtual)
 
             var profileBeginSelf = currentProfile.experienceLev.expBeginSelf;
             var profileBeginStudy = currentProfile.experienceLev.expBeginStudy;
             var profileInter = currentProfile.experienceLev.expInt;
             var profileAdv = currentProfile.experienceLev.expAdv;
-            console.log(profileBeginSelf, profileBeginStudy, profileInter, profileAdv)
 
             var profileFront = currentProfile.platformType.frontEnd;
             var profileBack = currentProfile.platformType.backEnd;
             var profileFull = currentProfile.platformType.fullStack;
             var profileIos = currentProfile.platformType.ios;
             var profileAndroid = currentProfile.platformType.android;
-            console.log(profileFront, profileBack, profileFull, profileIos, profileAndroid)
 
             var profileHtml = currentProfile.languageType.htmlCss;
             var profileJsjq = currentProfile.languageType.jsJq;
             var profilePython = currentProfile.languageType.python;
             var profileJava = currentProfile.languageType.java;
             var profileCplus = currentProfile.languageType.cPlus;
-            console.log(profileHtml, profileJsjq, profilePython, profileJava, profileCplus)
 
             var profileBeMentor = currentProfile.collabType.beMentor;
             var profileHaveMentor = currentProfile.collabType.haveMentor;
             var profileMeetCoder = currentProfile.collabType.meetCoder;
-            console.log(profileBeMentor, profileHaveMentor, profileMeetCoder);
 
             var profileGithub = currentProfile.gitHub;
             var profileLinkedIn = currentProfile.linkedIn;
@@ -78,8 +72,6 @@ $(document).ready(function () {
             var profileIagree = currentProfile.agreement.iAgree;
             var profileIcertify = currentProfile.agreement.iCertify;
             var profileMatchScore = currentProfile.matchScore;
-
-            console.log(profileGithub, profileLinkedIn, profileOtherProfile, profileIagree, profileIcertify);
 
             //Need to add steps to append in the table. Note, most data is "true" or "false". Need to convert to  how text should display
             // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
@@ -91,6 +83,8 @@ $(document).ready(function () {
     //Function to compare current user to all existing users
     function determineMatches(currentProfile) {
         console.log("Determine Matches!")
+
+        //Listen for change to any user profiles
         database.ref("/Users").on("value", function (snapshot) {
             var matchedUsersArray = [];
             allUsers = snapshot.val();
@@ -110,11 +104,16 @@ $(document).ready(function () {
             console.log(currentProfile.collabType.haveMentor, currentProfile.collabType.beMentor, currentProfile.collabType.meetCoder);
             console.log("-----------------------------------------");
 
-
+            //For each property (user) in the /Users section of database
             for (key in allUsers) {
-                console.log(allUsers[key]);
+
+                console.log(`COMPARE - current user ${currentProfile.name} and other user: ${allUsers[key].name}`);
+                                
                 allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
+                console.log(`${allUsers[key].name} match score before comparison: ${allUsers[key].matchScore}`);
                 var commonInterestScore = 0;
+
+
                 //If the current user's email matches an existing user's email (same user), do nothing
                 if (currentProfile.name === allUsers[key].name) {
                     console.log("same user, don't compare") //Using name for now. Will need to get a unique identifier
@@ -231,31 +230,31 @@ $(document).ready(function () {
                     if (currentProfile.collabType.haveMentor && allUsers[key].collabType.beMentor) {
                         console.log("You  are interested being mentored, and this user is interested in being a mentee!");
                         //Increase match score
-                        allUsers[key].matchScore += 10;
+                        allUsers[key].matchScore += 15;
                     } else if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
                         console.log("You  are interested in being a mentor, and this user is interested in being mentored!");
                         //Increase match score
-                        allUsers[key].matchScore += 10;
+                        allUsers[key].matchScore += 15;
                     };
                     if (currentProfile.collabType.meetCoder && allUsers[key].collabType.meetCoder) {
+                        console.log(commonInterestScore);
                         if (commonInterestScore > 2) { //If user has 3 or more common interests
                             console.log("You have 3 or more common interests!!");
 
                             //Increase match score
-                            allUsers[key].matchScore += 5;
+                            allUsers[key].matchScore += 10;
                         }
 
                     };
 
-                    console.log(currentProfile.name + "has a matchScore of " + allUsers[key].matchScore + "with" + allUsers[key].name);
-                    if (allUsers[key].matchScore > 20) {
+                    console.log(currentProfile.name + "has a matchScore of " + allUsers[key].matchScore + " with " + allUsers[key].name);
+                    if (allUsers[key].matchScore > 0) {
 
                         var matchedUser = allUsers[key];
                         matchedUsersArray.push(matchedUser); //Save a copy of the matched user in an array
-                        console.log("Array before calling display matches function:" + matchedUsersArray);                      
-
                     }
 
+                    console.log("------------------------------------")
                     }
                 } //End of for loop
             
@@ -267,8 +266,15 @@ $(document).ready(function () {
 
     function displayMatches(arrayOfUserObjects){
         console.log("displayMatches function!")
-        console.log("Array of matched User Objects (inside display matches function):");
         console.log(arrayOfUserObjects);
+        
+        arrayOfUserObjects.sort(function(a,b) {
+           return(b.matchScore-a.matchScore)
+        })
+
+
+    //for each item in the user
+       
     };
 
 
@@ -315,7 +321,7 @@ $(document).ready(function () {
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function (user) {
-                var userData = database.ref("/users");
+                var userData = database.ref("/Users");
                 console.log("create new user", firebase.auth().currentUser);
                 console.log("user:", user);
                 userData.push({
