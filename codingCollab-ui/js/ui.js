@@ -3,7 +3,7 @@ $(document).ready(function () {
     $("#locations-page").hide();
     $('.modal').modal();
 
-    
+
     //Get Firebase Config
     var config = {
         apiKey: "AIzaSyAkrlcozQa4UQ74mF_PwbvppuHjPW5B7f8",
@@ -19,8 +19,8 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     var database = firebase.database();
 
-//GLOBAL VARIABLES AND FUNCTIONS
-  
+    //GLOBAL VARIABLES AND FUNCTIONS
+
     var allUsers;
     var users = []; //May not be needed
     var userCount = 1; //May not be needed
@@ -97,15 +97,15 @@ $(document).ready(function () {
             console.log("Current User Connect Methods: ");
             console.log(currentProfile.connectMethod.local, currentProfile.connectMethod.localVir, currentProfile.connectMethod.virtual);
             console.log("-----------------------------------------");
-            
+
             console.log("Current User Interests: ");
             console.log(currentProfile.platformType.frontEnd, currentProfile.platformType.backEnd, currentProfile.platformType.fullStack, currentProfile.platformType.ios, currentProfile.platformType.android);
             console.log("-----------------------------------------");
-                      
+
             console.log("Current User Language: ");
             console.log(currentProfile.languageType.htmlCss, currentProfile.languageType.jsJq, currentProfile.languageType.python, currentProfile.languageType.java, currentProfile.languageType.cPlus);
             console.log("-----------------------------------------");
-           
+
             console.log("Current User Collab Type: ");
             console.log(currentProfile.collabType.haveMentor, currentProfile.collabType.beMentor, currentProfile.collabType.meetCoder);
             console.log("-----------------------------------------");
@@ -116,39 +116,40 @@ $(document).ready(function () {
                 allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
                 var commonInterestScore = 0;
                 //If the current user's email matches an existing user's email (same user), do nothing
-                if (currentProfile.name === allUsers[key].name){
+                if (currentProfile.name === allUsers[key].name) {
                     console.log("same user, don't compare") //Using name for now. Will need to get a unique identifier
-               
-                } else {                 
-               
-                //COMPARE CONNECTION METHOD - current user vs. other users
-                   
+
+                } else {
+
+                    //COMPARE CONNECTION METHOD - current user vs. other users
+
                     console.log("CONNECT METHODS - EXISTING USERS: ");
                     console.log(allUsers[key].connectMethod.local, allUsers[key].connectMethod.localVir, allUsers[key].connectMethod.virtual);
-                    
+
                     if (currentProfile.connectMethod.local && allUsers[key].connectMethod.local) { // && allUsers[key].connectMethod.local) {
                         console.log(`Both you and ${allUsers[key].name} want to connect locally!`);
                         //if (users location is 50 miles or less from existing user)
-                                //you both want to connect locally, and you're in the same area
-                                
-                                //Increase match score
-                                allUsers[key].matchScore += 15;
+                        //you both want to connect locally, and you're in the same area
+
+                        //Increase match score
+                        allUsers[key].matchScore += 15;
                     };
                     if (currentProfile.connectMethod.localVir && allUsers[key].connectMethod.localVir) {
                         console.log("You both want to connect locally & virtually!");
                         //if (users location is 50 miles or less from existing user)
-                                //you both want to connect virtually & locally, and you're in the same area!
-                                 //Increase match score
+                        //you both want to connect virtually & locally, and you're in the same area!
+                        //Increase match score
 
-                                 allUsers[key].matchScore += 10;
+                        allUsers[key].matchScore += 10;
                     };
                     if (currentProfile.connectMethod.virtual && allUsers[key].connectMethod.virtual) {
                         console.log("You both want to connect virtually!");
                         //Increase match score
-                    };  allUsers[key].matchScore += 5;
+                    };
+                    allUsers[key].matchScore += 5;
 
-                //COMPARE PLATFORM - current user vs. other users
-                 
+                    //COMPARE PLATFORM - current user vs. other users
+
                     console.log("PLATFORM INTERESTS - EXISTING USERS: ");
                     console.log(allUsers[key].platformType.frontEnd, allUsers[key].platformType.backEnd, allUsers[key].platformType.fullStack, allUsers[key].platformType.ios, allUsers[key].platformType.android);
 
@@ -169,24 +170,24 @@ $(document).ready(function () {
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
-                    };  
+                    };
                     if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
                         console.log("You both are interested in developing iOS apps!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
-                    };  
+                    };
                     if (currentProfile.platformType.android && allUsers[key].platformType.android) {
                         console.log("You both are interested in developing android apps!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
-                    }; 
+                    };
 
-                //COMPARE LANGUAGE - current user vs. other users 
+                    //COMPARE LANGUAGE - current user vs. other users 
 
-                console.log("LANGUAGE TYPE - EXISTING USERS: ");
-                console.log(allUsers[key].languageType.htmlCss, allUsers[key].languageType.jsJq, allUsers[key].languageType.python, allUsers[key].languageType.java, allUsers[key].languageType.cPlus);
+                    console.log("LANGUAGE TYPE - EXISTING USERS: ");
+                    console.log(allUsers[key].languageType.htmlCss, allUsers[key].languageType.jsJq, allUsers[key].languageType.python, allUsers[key].languageType.java, allUsers[key].languageType.cPlus);
 
 
                     if (currentProfile.languageType.htmlCss && allUsers[key].languageType.htmlCss) {
@@ -195,7 +196,7 @@ $(document).ready(function () {
                         //Increase match score
                         allUsers[key].matchScore += 5;
                     };
-                    
+
                     if (currentProfile.languageType.jsJq && allUsers[key].languageType.jsJq) {
                         console.log("You both are interested in javaScript!");
                         commonInterestScore++;
@@ -220,19 +221,18 @@ $(document).ready(function () {
                         //Increase match score
                         allUsers[key].matchScore += 5;
                     };
-                  
 
-                //COMPARE COLLAB TYPE - current user vs. other users - Left off here
+
+                    //COMPARE COLLAB TYPE - current user vs. other users - Left off here
 
                     console.log("COLLAB TYPE - EXISTING USERS: ");
                     console.log(allUsers[key].collabType.beMentor, allUsers[key].collabType.haveMentor, allUsers[key].collabType.meetCoder);
-    
+
                     if (currentProfile.collabType.haveMentor && allUsers[key].collabType.beMentor) {
                         console.log("You  are interested being mentored, and this user is interested in being a mentee!");
-                         //Increase match score
+                        //Increase match score
                         allUsers[key].matchScore += 10;
-                    }
-                    else if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
+                    } else if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
                         console.log("You  are interested in being a mentor, and this user is interested in being mentored!");
                         //Increase match score
                         allUsers[key].matchScore += 10;
@@ -244,18 +244,17 @@ $(document).ready(function () {
                             //Increase match score
                             allUsers[key].matchScore += 5;
                         }
-                    
+
                     };
-                    console.log(currentProfile.name +  "has a matchScore of " + allUsers[key].matchScore + "with" + allUsers[key].name);               
-                    
-                    if (allUsers[key].matchScore > 20){
+
+                    console.log(currentProfile.name + "has a matchScore of " + allUsers[key].matchScore + "with" + allUsers[key].name);
+                    if (allUsers[key].matchScore > 20) {
+
                         var matchedUser = allUsers[key];
                         matchedUsersArray.push(matchedUser); //Save a copy of the matched user in an array
                         console.log("Array before calling display matches function:" + matchedUsersArray);                      
 
                     }
-
-                       
 
                     }
                 } //End of for loop
@@ -271,9 +270,9 @@ $(document).ready(function () {
         console.log("Array of matched User Objects (inside display matches function):");
         console.log(arrayOfUserObjects);
     };
-   
 
-//Login an EXISTING user - When login button is clicked:
+
+    //Login an EXISTING user - When login button is clicked:
     $("#login-btn").on("click", function (event) {
         event.preventDefault();
         console.log("LOGIN button clicked");
@@ -298,7 +297,7 @@ $(document).ready(function () {
         password = $("#existing-user-password").val("");
     });
 
-//Signup a NEW user - when the join button is clicked
+    //Signup a NEW user - when the join button is clicked
     $("#create-btn").on("click", function (event) {
         event.preventDefault();
         $("#home-page").hide();
@@ -312,13 +311,30 @@ $(document).ready(function () {
         var auth = firebase.auth();
 
         //Firebase NEW user method
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(error.code);
-            console.log(error.message);
-        });
+
+        //Firebase NEW user method
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(function (user) {
+                var userData = database.ref("/users");
+                console.log("create new user", firebase.auth().currentUser);
+                console.log("user:", user);
+                userData.push({
+                    name: user.email
+                });
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(error.code);
+                console.log(error.message);
+            });
+        // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+        //     // Handle Errors here.
+        //     var errorCode = error.code;
+        //     var errorMessage = error.message;
+        //     console.log(error.code);
+        //     console.log(error.message);
+        // });
 
         // Clears all the text boxes
         email = $("#new-user-email").val("");
@@ -326,7 +342,7 @@ $(document).ready(function () {
         repeatPassword = $("#repeat-password").val("");
     });
 
-//Logout current user - when logout button is clicked
+    //Logout current user - when logout button is clicked
     $("#logout-btn").on("click", function (event) {
         event.preventDefault();
         console.log("LOGOUT button was clicked");
@@ -361,7 +377,7 @@ $(document).ready(function () {
         }
     });
 
-//Side bar functionality
+    //Side bar functionality
 
     $(".button-collapse").sideNav({
         menuWidth: 300, // Default is 300
@@ -382,7 +398,7 @@ $(document).ready(function () {
         $('.button-collapse').sideNav('show');
     });
 
-//USER HOME PAGE / PROFILE
+    //USER HOME PAGE / PROFILE
 
     // When user submits or edits profile and clicks submit
     $("#profile-submit").on("click", function () {
@@ -440,7 +456,7 @@ $(document).ready(function () {
             },
             matchScore: 0,
         };
-        
+
         //Capture user inputs and update newUser object with new values
         var userName = $("#display-name").val().trim();
         newUser.name = userName;
@@ -677,9 +693,9 @@ $(document).ready(function () {
     });
 
     var map;
-    
+
     //Loads map centered on Orlando
-    window.initMap = function() {
+    window.initMap = function () {
         map = new google.maps.Map(document.getElementById("map"), {
             center: {
                 lat: 28.538336,
@@ -700,7 +716,7 @@ $(document).ready(function () {
             "ChIJC99qTMtn54gRtlbMV-DDSJY",
             "ChIJ0ctB7cV654gRxMBMcdr9AN0",
             "ChIJGwBhSMV654gR0W59VlLMV2w"
-        ]; 
+        ];
 
         var service = new google.maps.places.PlacesService(map);
 
