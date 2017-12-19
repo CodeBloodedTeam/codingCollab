@@ -1027,25 +1027,11 @@ $(document).ready(function () {
         var hours = locationObject.opening_hours.weekday_text;
         var rating = locationObject.rating;
 
-        var today = new Date();
-        var todayDay = today.getDay();
-
-        console.log(today);
-        console.log(todayDay);
-        console.log(typeof todayDay)
-
-        if (todayDay < 1) { //Sunday
-            var apiDay = 6;
-
-        }else{
-            var apiDay = (todayDay - 1);
-        };
 
         console.log(locationObject.name, locationObject.formatted_address, locationObject.opening_hours.weekday_text,
-            locationObject.opening_hours.open_now, locationObject.rating);
-            
+            locationObject.opening_hours.open_now, locationObject.rating)
         $("table > tbody").append(
-            `<tr><td>${name}</td><td>${address}</td><td>${hours[apiDay]}</td><td>${rating}<td></tr>`)
+            `<tr><td>${name}</td><td>${address}</td><td>${hours[0]}</td><td>${rating}<td></tr>`)
 
     };
 
