@@ -102,11 +102,19 @@ $(document).ready(function () {
             console.log(currentProfile.platformType.frontEnd, currentProfile.platformType.backEnd, currentProfile.platformType.fullStack, currentProfile.platformType.ios, currentProfile.platformType.android);
             console.log("-----------------------------------------");
                       
+            console.log("Current User Language: ");
+            console.log(currentProfile.languageType.htmlCss, currentProfile.languageType.jsJq, currentProfile.languageType.python, currentProfile.languageType.java, currentProfile.languageType.cPlus);
+            console.log("-----------------------------------------");
            
+            console.log("Current User Collab Type: ");
+            console.log(currentProfile.collabType.haveMentor, currentProfile.collabType.beMentor, currentProfile.collabType.meetCoder);
+            console.log("-----------------------------------------");
+
+
             for (key in allUsers) {
                 console.log(allUsers[key]);
                 allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
-                
+                var commonInterestScore = 0;
                 //If the current user's email matches an existing user's email (same user), do nothing
                 if (currentProfile.name === allUsers[key].name){
                     console.log("same user, don't compare") //Using name for now. Will need to get a unique identifier
@@ -123,9 +131,6 @@ $(document).ready(function () {
                         //if (users location is 50 miles or less from existing user)
                                 //you both want to connect locally, and you're in the same area
                                  //Increase match score
-                    }else{
-                        
-                        console.log("One or both of you do not want to meet locally");
                     };
                     if (currentProfile.connectMethod.localVir && allUsers[key].connectMethod.localVir) {
                         console.log("You both want to connect locally & virtually!");
@@ -141,58 +146,96 @@ $(document).ready(function () {
 
                 //COMPARE PLATFORM - current user vs. other users
                  
-                console.log("PLATFORM INTERESTS - EXISTING USERS: ");
-                console.log(allUsers[key].platformType.frontEnd, allUsers[key].platformType.backEnd, allUsers[key].platformType.fullStack, allUsers[key].platformType.ios, allUsers[key].platformType.android);
+                    console.log("PLATFORM INTERESTS - EXISTING USERS: ");
+                    console.log(allUsers[key].platformType.frontEnd, allUsers[key].platformType.backEnd, allUsers[key].platformType.fullStack, allUsers[key].platformType.ios, allUsers[key].platformType.android);
 
                     if (currentProfile.platformType.frontEnd && allUsers[key].platformType.frontEnd) {
                         console.log("You both are interested in front end development!");
+                        commonInterestScore++;
                         //Increase match score
                     };
                     if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
                         console.log("You both are interested in backend development!");
+                        commonInterestScore++;
                         //Increase match score
+                        
                     };
                     if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
                         console.log("You both are interested in fullstack development!");
+                        commonInterestScore++;
                         //Increase match score
                     };
                     if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
                         console.log("You both are interested in developing iOS apps!");
+                        commonInterestScore++;
                         //Increase match score
                     };
                     if (currentProfile.platformType.android && allUsers[key].platformType.android) {
                         console.log("You both are interested in developing android apps!");
+                        commonInterestScore++;
                         //Increase match score
                     }; 
 
-                    //COMPARE Language - current user vs. other users - Left off here
-                    console.log("LANGUAGES - EXISTING USERS: ");
-                    console.log(allUsers[key].languageType.jsJq, allUsers[key].languageType.python, allUsers[key].languageType.java, allUsers[key].languageType.htmlCss, allUsers[key].languageType.htmlCss);
-    
-                    if (currentProfile.platformType.frontEnd && allUsers[key].platformType.frontEnd) {
-                        console.log("You both are interested in front end development!");
-                        //Increase match score
-                    };
-                    if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
-                        console.log("You both are interested in backend development!");
-                        //Increase match score
-                    };
-                    if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
-                        console.log("You both are interested in fullstack development!");
-                        //Increase match score
-                    };
-                    if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
-                        console.log("You both are interested in developing iOS apps!");
-                        //Increase match score
-                    };
-                    if (currentProfile.platformType.android && allUsers[key].platformType.android) {
-                        console.log("You both are interested in developing android apps!");
-                        //Increase match score
-                    }; 
+                //COMPARE LANGUAGE - current user vs. other users 
 
-                
+                console.log("LANGUAGE TYPE - EXISTING USERS: ");
+                console.log(allUsers[key].languageType.htmlCss, allUsers[key].languageType.jsJq, allUsers[key].languageType.python, allUsers[key].languageType.java, allUsers[key].languageType.cPlus);
 
+
+                    if (currentProfile.languageType.htmlCss && allUsers[key].languageType.htmlCss) {
+                        console.log("You both are interested in html & CSS!");
+                        commonInterestScore++;
+                        //Increase match score
+                    };
                     
+                    if (currentProfile.languageType.jsJq && allUsers[key].languageType.jsJq) {
+                        console.log("You both are interested in javaScript!");
+                        commonInterestScore++;
+                        //Increase match score
+                    };
+                    if (currentProfile.languageType.python && allUsers[key].languageType.python) {
+                        console.log("You both are interested in Python!");
+                        commonInterestScore++;
+                        //Increase match score
+                    };
+                    if (currentProfile.languageType.java && allUsers[key].languageType.java) {
+                        console.log("You both are interested in Java!");
+                        commonInterestScore++;
+                        //Increase match score
+                    };
+                    if (currentProfile.languageType.cPlus && allUsers[key].languageType.cPlus) {
+                        console.log("You both are interested in C+!");
+                        commonInterestScore++;
+                        //Increase match score
+                    };
+                  
+
+                //COMPARE COLLAB TYPE - current user vs. other users - Left off here
+
+                    console.log("COLLAB TYPE - EXISTING USERS: ");
+                    console.log(allUsers[key].collabType.beMentor, allUsers[key].collabType.haveMentor, allUsers[key].collabType.meetCoder);
+    
+                    if (currentProfile.collabType.haveMentor && allUsers[key].collabType.beMentor) {
+                        console.log("You  are interested being mentored, and this user is interested in being a mentee!");
+                        //Increase match score
+                    };
+                    if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
+                        console.log("You  are interested in being a mentor, and this user is interested in being mentored!");
+                        //Increase match score
+                    };
+                    if (currentProfile.collabType.meetCoder && allUsers[key].collabType.meetCoder) {
+                        if (commonInterestScore > 2) { //If user has 3 or more common interests
+                            console.log("You have 3 or more common interests!!");
+
+                        //Increase match score
+                        }
+                    
+                    };
+                    
+            
+
+
+               
 
 
 
