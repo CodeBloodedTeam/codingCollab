@@ -24,6 +24,24 @@ $(document).ready(function () {
     var users = []; //May not be needed
     var userCount = 1; //May not be needed
     var userId;
+    var matchMessages = [
+        "local and interested in meeting up in person",
+        "local and interested in meeting virtually",
+        "interested in meeting virtually",
+        "interested in Front End development",
+        "interested in Back End development",
+        "interested in Fullstack development",
+        "interested in iOS development",
+        "interested in android development",
+        "interested in html & CSS",
+        "interested in JavaScript!",
+        "interested in Python",
+        "interested in Java",
+        "interested in C++",
+        "interested in being a mentor",
+        "interested in having a mentor",
+        "interested in meeting coders w/ same interests"];
+        
 
 
     function displayProfile(userKey) {
@@ -144,15 +162,6 @@ $(document).ready(function () {
                         //Increase match score
                         allUsers[key].matchScore += 15;
 
-                        //Update matchTracker string, change index from 0 to 1 to track where the match occured                        
-                        
-                        // console.log(allUsers[key].matchTracker);
-                        // console.log(matchTrackerIndex);
-                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex, 1));
-                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex, 1) + "1");
-
-                        
-
 
                         console.log(matchTrackerIndex);                        
                         allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
@@ -174,19 +183,7 @@ $(document).ready(function () {
                         allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
                         console.log(allUsers[key].matchTracker);
                         
-                        
-                        
-                        // allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
-                        // console.log(allUsers[key].matchTracker); //Should return same as above
-                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex)); //Should return character at first in index: 1
-
-
-                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1"); //Should return first index and number 1 concatenated: 11
-                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex + 1)); //Should return all characters at 2nd index position (3rd character) - the end of the string
-                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1)); //should return full string with new value: 1100000000000000
-                        // console.log(newMatchTracker) //SHould return same as above
-                        
-                        
+ 
                     };
                     matchTrackerIndex++;
 
@@ -401,19 +398,175 @@ $(document).ready(function () {
 
         console.log(sortedArray);
 
-        for (var i = 0; i < 6; i < i++) {
+        var userMatchReasons = [];
+        var matchReason = "";
+
+        for (var i = 0; i < 6; i < i++) { //For each user, add the appropriate match message based on why they matched
+
+            userMatchReasons = [];
+
+            //If this user's matchTracker shows a match for index 13 (question 14) - Match wants to be a mentor
+                                            
+            if (parseInt((sortedArray[i].matchTracker).charAt(13)) > 0) {
+
+                console.log("Match at index 13")
+                //save the corresponding match message to a variable, and push this variable into the array of matchReasons array for this user
+                matchReason = matchMessages[13];
+
+                console.log(matchReason);
+                userMatchReasons.push(matchReason);
+                console.log(userMatchReasons);
+               
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(14)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[14];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(0)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[0];
+                userMatchReasons.push(matchReason);
+               
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(1)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[1];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(2)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[2];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(12)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[12];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(11)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[11];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(10)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[10];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(9)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[9];
+                userMatchReasons.push(matchReason);
+                
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(8)) > 0) {
+                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[8];
+                userMatchReasons.push(matchReason);
+               
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(6)) > 0) {
+                
+                    //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                    matchReason = matchMessages[6];
+                    userMatchReasons.push(matchReason);
+                    
+    
+                };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(7)) > 0) {
+                
+                    //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                    matchReason = matchMessages[7];
+                    userMatchReasons.push(matchReason);
+                    
+    
+                };
             
+            if (parseInt((sortedArray[i].matchTracker).charAt(5)) > 0) {
+                
+                    //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                    matchReason = matchMessages[5];
+                    userMatchReasons.push(matchReason);
+                    
+    
+                };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(4)) > 0) {
+                
+                    //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                    matchReason = matchMessages[4];
+                    userMatchReasons.push(matchReason);
+                    
+    
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(3)) > 0) {
+                                
+                //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+                matchReason = matchMessages[3];
+                userMatchReasons.push(matchReason);
+                
+
+            };
+
+            if (parseInt((sortedArray[i].matchTracker).charAt(15)) > 0){
+                
+            //save the corresponding match message to a variable, and push this variable into the array of matchResons for this user
+            matchReason = matchMessages[15];
+            userMatchReasons.push(matchReason);
+            
+
+            };     
+            
+            console.log(userMatchReasons); 
+
             //For matchUsers at index position 0,2,4 - left column
             if (i%2 == 0){
                 console.log("left Column!");
                 $(".leftColumnMatches").append(`<div class="row">
-                                                <div class="icon-block">
-                                                <h2 class="center brown-text">
-                                                    <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
-                                                </h2>
-                                               <h5 class="center teal-text"> <a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
-                                                <p class="center light">Match Score is ${sortedArray[i].matchScore}!
-                                                <br>Wants to be a mentor</p>
+                                                <div class="icon-block centerMatches">
+                                                    <h2 class="center brown-text">
+                                                        <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+                                                    </h2>
+                                                    <h5 class="center teal-text"> <a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
+                                                    <p class="center light">Your match Score is ${sortedArray[i].matchScore}!</p>
+                                                    <p>This user is ${userMatchReasons[0]} and ${userMatchReasons[1]} </p>
                                                 </div>
                                                 </div>`);
                 console.log(`Match ${i + 1} of 6 max appended!`);
@@ -422,17 +575,17 @@ $(document).ready(function () {
 
 
             } else { //For matchUsers at index position 1,3,5 - right column
-                console.log("left Column!");
+                console.log("Right Column!");
                 $(".rightColumnMatches").append(`<div class="row">
-                                                    <div class="icon-block">
+                                                <div class="icon-block centerMatches">
                                                     <h2 class="center brown-text">
                                                         <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
                                                     </h2>
-                                                    <h5 class="center teal-text"><a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
-                                                    <p class="center light">Match Score is ${sortedArray[i].matchScore}!
-                                                    <br>Wants to be a mentor</p>
-                                                    </div>
-                                                    </div>`);
+                                                    <h5 class="center teal-text"> <a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
+                                                    <p class="center light">Your match Score is ${sortedArray[i].matchScore}!</p>
+                                                    <p>This user is ${userMatchReasons[0]} and ${userMatchReasons[1]}! </p>
+                                                </div>
+                                                </div>`);
 
                 console.log(`Match ${i + 1} of 6 max appended!`);
             }
