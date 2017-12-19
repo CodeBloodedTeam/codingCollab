@@ -78,6 +78,10 @@ main {
   margin: auto;
 }
 
+#map {
+  height: 500px;
+}
+
 html,
 body {
   height: 100%;
