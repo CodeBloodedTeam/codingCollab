@@ -77,7 +77,7 @@ $(document).ready(function () {
             var profileOtherProfile = currentProfile.otherProfile;
             var profileIagree = currentProfile.agreement.iAgree;
             var profileIcertify = currentProfile.agreement.iCertify;
-            var profileMatchSchore = currentProfile.matchscore;
+            var profileMatchScore = currentProfile.matchScore;
 
             console.log(profileGithub, profileLinkedIn, profileOtherProfile, profileIagree, profileIcertify);
 
@@ -130,7 +130,9 @@ $(document).ready(function () {
                         console.log(`Both you and ${allUsers[key].name} want to connect locally!`);
                         //if (users location is 50 miles or less from existing user)
                                 //you both want to connect locally, and you're in the same area
-                                 //Increase match score
+                                
+                                //Increase match score
+                                allUsers[key].matchScore += 15;
                     };
                     if (currentProfile.connectMethod.localVir && allUsers[key].connectMethod.localVir) {
                         console.log("You both want to connect locally & virtually!");
@@ -138,11 +140,12 @@ $(document).ready(function () {
                                 //you both want to connect virtually & locally, and you're in the same area!
                                  //Increase match score
 
+                                 allUsers[key].matchScore += 10;
                     };
                     if (currentProfile.connectMethod.virtual && allUsers[key].connectMethod.virtual) {
                         console.log("You both want to connect virtually!");
                         //Increase match score
-                    };
+                    };  allUsers[key].matchScore += 5;
 
                 //COMPARE PLATFORM - current user vs. other users
                  
@@ -153,27 +156,31 @@ $(document).ready(function () {
                         console.log("You both are interested in front end development!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 4;
                     };
                     if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
                         console.log("You both are interested in backend development!");
                         commonInterestScore++;
                         //Increase match score
-                        
+                        allUsers[key].matchScore += 4;
                     };
                     if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
                         console.log("You both are interested in fullstack development!");
                         commonInterestScore++;
                         //Increase match score
-                    };
+                        allUsers[key].matchScore += 4;
+                    };  
                     if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
                         console.log("You both are interested in developing iOS apps!");
                         commonInterestScore++;
                         //Increase match score
-                    };
+                        allUsers[key].matchScore += 4;
+                    };  
                     if (currentProfile.platformType.android && allUsers[key].platformType.android) {
                         console.log("You both are interested in developing android apps!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 4;
                     }; 
 
                 //COMPARE LANGUAGE - current user vs. other users 
@@ -186,27 +193,32 @@ $(document).ready(function () {
                         console.log("You both are interested in html & CSS!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 5;
                     };
                     
                     if (currentProfile.languageType.jsJq && allUsers[key].languageType.jsJq) {
                         console.log("You both are interested in javaScript!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 5;
                     };
                     if (currentProfile.languageType.python && allUsers[key].languageType.python) {
                         console.log("You both are interested in Python!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 5;
                     };
                     if (currentProfile.languageType.java && allUsers[key].languageType.java) {
                         console.log("You both are interested in Java!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 5;
                     };
                     if (currentProfile.languageType.cPlus && allUsers[key].languageType.cPlus) {
                         console.log("You both are interested in C+!");
                         commonInterestScore++;
                         //Increase match score
+                        allUsers[key].matchScore += 5;
                     };
                   
 
@@ -217,31 +229,31 @@ $(document).ready(function () {
     
                     if (currentProfile.collabType.haveMentor && allUsers[key].collabType.beMentor) {
                         console.log("You  are interested being mentored, and this user is interested in being a mentee!");
-                        //Increase match score
-                    };
-                    if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
+                         //Increase match score
+                        allUsers[key].matchScore += 10;
+                    }
+                    else if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
                         console.log("You  are interested in being a mentor, and this user is interested in being mentored!");
                         //Increase match score
+                        allUsers[key].matchScore += 10;
                     };
                     if (currentProfile.collabType.meetCoder && allUsers[key].collabType.meetCoder) {
                         if (commonInterestScore > 2) { //If user has 3 or more common interests
                             console.log("You have 3 or more common interests!!");
 
-                        //Increase match score
+                            //Increase match score
+                            allUsers[key].matchScore += 5;
                         }
                     
                     };
-                    
-            
+                    console.log(currentProfile.name +  "has a matchScore of " + allUsers[key].matchScore + "with" + allUsers[key].name);               
+                    if (allUsers[key].matchScore > 20){
+                        var matchedUser = allUsers[key];
+                        matchedUsers.push(matchedUser); //Save a copy of the matched user in an array
+                        console.log(matchedUsers);
+                        //Call another function to create a div, and display certain data from the matchedUser object in the DOM
+                    }
 
-
-               
-
-
-
-                            //Matching Steps (General)
-                        //Determine what to check, and weight for each.
-                        //If match score is greater than TBD amount, add that matched profile to a matchedUsers array.
                         //Iterate through the array and display the chosen data for each matchObject in the Dom, up to 6 matches.
 
                     }
@@ -545,10 +557,6 @@ $(document).ready(function () {
             console.log("c++: ", newUser.languageType.cPlus);
         };
 
-        if ($("#php").is(':checked')) {
-            newUser.languageType.php = true;
-            console.log("php: ", newUser.languageType.php);
-        };
 
         // collabType
         if ($("#be-mentor").is(':checked')) {
