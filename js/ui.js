@@ -107,10 +107,18 @@ $(document).ready(function () {
             //For each property (user) in the /Users section of database
             for (key in allUsers) {
 
+                
+                var scoreTracker = [];
                 console.log(`COMPARE - current user ${currentProfile.name} and other user: ${allUsers[key].name}`);
                                 
-                allUsers[key].matchScore = 0; //Resets the matchScore for each existing user everytime the matches are displayed, and recalculates
-                console.log(`${allUsers[key].name} match score before comparison: ${allUsers[key].matchScore}`);
+                allUsers[key].matchScore = 0; //Resets the matchScore and matchTracker for each existing user everytime the matches are displayed, and recalculates
+                allUsers[key].matchTracker = "0000000000000000";
+                var matchTrackerIndex = 0;
+                // var newMatchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                
+                
+                console.log(allUsers[key])
+                console.log(`${allUsers[key].name} match score before comparison: ${allUsers[key].matchScore} and matchTracker before comparison ${allUsers[key].matchTracker}`);
                 var commonInterestScore = 0;
 
 
@@ -127,12 +135,33 @@ $(document).ready(function () {
 
                     if (currentProfile.connectMethod.local && allUsers[key].connectMethod.local) { // && allUsers[key].connectMethod.local) {
                         console.log(`Both you and ${allUsers[key].name} want to connect locally!`);
-                        //if (users location is 50 miles or less from existing user)
-                        //you both want to connect locally, and you're in the same area
+                            
+                                //function for determining user distance based on longitude/latitude, return distance in miles as a variable
+                            //if (users location is 50 miles or less from existing user location)
+                            
+                            //you both want to connect locally, and you're in the same area
 
                         //Increase match score
                         allUsers[key].matchScore += 15;
+
+                        //Update matchTracker string, change index from 0 to 1 to track where the match occured                        
+                        
+                        // console.log(allUsers[key].matchTracker);
+                        // console.log(matchTrackerIndex);
+                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex, 1));
+                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex, 1) + "1");
+
+                        
+
+
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
+                       
                     };
+
+                    matchTrackerIndex++;
+
                     if (currentProfile.connectMethod.localVir && allUsers[key].connectMethod.localVir) {
                         console.log("You both want to connect locally & virtually!");
                         //if (users location is 50 miles or less from existing user)
@@ -140,12 +169,37 @@ $(document).ready(function () {
                         //Increase match score
 
                         allUsers[key].matchScore += 10;
+
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
+                        
+                        
+                        
+                        // allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        // console.log(allUsers[key].matchTracker); //Should return same as above
+                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex)); //Should return character at first in index: 1
+
+
+                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1"); //Should return first index and number 1 concatenated: 11
+                        // console.log(allUsers[key].matchTracker.substr(matchTrackerIndex + 1)); //Should return all characters at 2nd index position (3rd character) - the end of the string
+                        // console.log(allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1)); //should return full string with new value: 1100000000000000
+                        // console.log(newMatchTracker) //SHould return same as above
+                        
+                        
                     };
+                    matchTrackerIndex++;
+
                     if (currentProfile.connectMethod.virtual && allUsers[key].connectMethod.virtual) {
                         console.log("You both want to connect virtually!");
                         //Increase match score
+                        allUsers[key].matchScore += 5;
+
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
-                    allUsers[key].matchScore += 5;
+                    matchTrackerIndex++;
 
                     //COMPARE PLATFORM - current user vs. other users
 
@@ -157,31 +211,56 @@ $(document).ready(function () {
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
+
                     };
+                    matchTrackerIndex++;
+
                     if (currentProfile.platformType.backEnd && allUsers[key].platformType.backEnd) {
                         console.log("You both are interested in backend development!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+
+                    matchTrackerIndex++;
                     if (currentProfile.platformType.fullStack && allUsers[key].platformType.fullStack) {
                         console.log("You both are interested in fullstack development!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+
+                    matchTrackerIndex++;
                     if (currentProfile.platformType.ios && allUsers[key].platformType.ios) {
                         console.log("You both are interested in developing iOS apps!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+
+                    matchTrackerIndex++;
                     if (currentProfile.platformType.android && allUsers[key].platformType.android) {
                         console.log("You both are interested in developing android apps!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 4;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+                    matchTrackerIndex++;
 
                     //COMPARE LANGUAGE - current user vs. other users 
 
@@ -194,32 +273,55 @@ $(document).ready(function () {
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 5;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+                    matchTrackerIndex++;
 
                     if (currentProfile.languageType.jsJq && allUsers[key].languageType.jsJq) {
                         console.log("You both are interested in javaScript!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 5;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+                    matchTrackerIndex++;
+
                     if (currentProfile.languageType.python && allUsers[key].languageType.python) {
                         console.log("You both are interested in Python!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 5;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+                    matchTrackerIndex++;
+
                     if (currentProfile.languageType.java && allUsers[key].languageType.java) {
                         console.log("You both are interested in Java!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 5;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+
+                    matchTrackerIndex++;
                     if (currentProfile.languageType.cPlus && allUsers[key].languageType.cPlus) {
-                        console.log("You both are interested in C+!");
+                        console.log("You both are interested in C++!");
                         commonInterestScore++;
                         //Increase match score
                         allUsers[key].matchScore += 5;
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+                    matchTrackerIndex++;
 
 
                     //COMPARE COLLAB TYPE - current user vs. other users - Left off here
@@ -231,11 +333,26 @@ $(document).ready(function () {
                         console.log("You  are interested being mentored, and this user is interested in being a mentee!");
                         //Increase match score
                         allUsers[key].matchScore += 15;
+
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
+                        matchTrackerIndex++; //Happens inside "if" to skip logging the next index since match happens on question 14 or 15, but not both
+
                     } else if (currentProfile.collabType.beMentor && allUsers[key].collabType.haveMentor) {
+                        
+                        matchTrackerIndex++; //To skip logging an answer for question 14
                         console.log("You  are interested in being a mentor, and this user is interested in being mentored!");
                         //Increase match score
                         allUsers[key].matchScore += 15;
+
+                        console.log(matchTrackerIndex);                        
+                        allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                        console.log(allUsers[key].matchTracker);
                     };
+
+                    matchTrackerIndex++;
+
                     if (currentProfile.collabType.meetCoder && allUsers[key].collabType.meetCoder) {
                         console.log(commonInterestScore);
                         if (commonInterestScore > 2) { //If user has 3 or more common interests
@@ -243,13 +360,17 @@ $(document).ready(function () {
 
                             //Increase match score
                             allUsers[key].matchScore += 10;
+
+                            console.log(matchTrackerIndex);                        
+                            allUsers[key].matchTracker = (allUsers[key].matchTracker.substr(0, matchTrackerIndex) + "1" + allUsers[key].matchTracker.substr(matchTrackerIndex + 1));
+                            console.log(allUsers[key].matchTracker);
                         }
 
                     };
 
                     console.log(currentProfile.name + "has a matchScore of " + allUsers[key].matchScore + " with " + allUsers[key].name);
                     if (allUsers[key].matchScore > 0) {
-
+                        console.log(allUsers[key].matchTracker);
                         var matchedUser = allUsers[key];
                         matchedUsersArray.push(matchedUser); //Save a copy of the matched user in an array
                     }
@@ -504,6 +625,7 @@ $(document).ready(function () {
                 iCertify: false,
             },
             matchScore: 0,
+            matchTracker: "0000000000000000"
         };
 
         //Capture user inputs and update newUser object with new values
