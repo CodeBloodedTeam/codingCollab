@@ -24,14 +24,14 @@ $(document).ready(function () {
     var allUsers;
     var users = []; //May not be needed
     var userCount = 1; //May not be needed
+    var userId;
 
 
     function displayProfile(userKey) {
         console.log("display profile!")
-
-        database.ref("/Users").child(userKey).on("value", function (snapshot) {
-            var database = firebase.database();
-
+        console.log(userKey);
+        database.ref("/Users").child(userKey).on("value", function(snapshot) {
+            
             console.log(snapshot.val());
             var currentProfile = snapshot.val();
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
             //Need to add steps to append in the table. Note, most data is "true" or "false". Need to convert to  how text should display
             // $("#prof-display-table > tbody").append(`<tr><td>I prefer to connect: ${thisUser.userLocal}<td></tr>`)
 
-            displayMatches(currentProfile)
+            determineMatches(currentProfile)
         })
     };
 
@@ -372,8 +372,9 @@ $(document).ready(function () {
             console.log(email, userID)
             $("#home-page").hide();
             $("#user-home-page").show();
+            displayProfile(userID);
         } else {
-            console.log("User is logged out.");
+            console.log("No users logged in");
         }
     });
 
