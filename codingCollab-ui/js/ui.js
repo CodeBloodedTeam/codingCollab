@@ -265,16 +265,60 @@ $(document).ready(function () {
         };
 
     function displayMatches(arrayOfUserObjects){
+        $(".leftColumnMatches").empty();
+        $(".rightColumnMatches").empty();
+
+
         console.log("displayMatches function!")
         console.log(arrayOfUserObjects);
         
         arrayOfUserObjects.sort(function(a,b) {
-           return(b.matchScore-a.matchScore)
-        })
+           return b.matchScore-a.matchScore
+        });
+
+        var sortedArray = arrayOfUserObjects;
+
+        console.log(sortedArray);
+
+        for (var i = 0; i < 6; i < i++) {
+            
+            //For matchUsers at index position 0,2,4 - left column
+            if (i%2 == 0){
+                console.log("left Column!");
+                $(".leftColumnMatches").append(`<div class="row">
+                                                <div class="icon-block">
+                                                <h2 class="center brown-text">
+                                                    <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+                                                </h2>
+                                                <h5 class="center teal-text">${sortedArray[i].name}</h5>
+                                                <p class="center light">Match Score is ${sortedArray[i].matchScore}!
+                                                <br>Wants to be a mentor</p>
+                                                </div>
+                                                </div>`);
+                console.log(`Match ${i + 1} of 6 max appended!`);
+                                                
 
 
-    //for each item in the user
-       
+
+            } else { //For matchUsers at index position 1,3,5 - right column
+                console.log("left Column!");
+                $(".rightColumnMatches").append(`<div class="row">
+                                                    <div class="icon-block">
+                                                    <h2 class="center brown-text">
+                                                        <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+                                                    </h2>
+                                                    <h5 class="center teal-text">${sortedArray[i].name}</h5>
+                                                    <p class="center light">Match Score is ${sortedArray[i].matchScore}!
+                                                    <br>Wants to be a mentor</p>
+                                                    </div>
+                                                    </div>`);
+
+                console.log(`Match ${i + 1} of 6 max appended!`);
+            }
+
+        }
+        console.log("Finished displaying matches")
+        
     };
 
 
