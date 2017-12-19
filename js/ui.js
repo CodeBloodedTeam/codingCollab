@@ -931,6 +931,13 @@ $(document).ready(function () {
         database.ref("/Users").child(userID).set(newUser);
         console.log(newUser);
 
+        $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
+        "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
+        "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
+        "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
+        "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
+        "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
+
         // ** MIGHT NOT CLEAR THESE! ** Clear all the text boxes after user clicks Submit:
         //   name = $("#display-name").val("");
         //   address = $("#add-address").val("");
@@ -938,8 +945,9 @@ $(document).ready(function () {
         //   state = $("#sel-state").val("");
         //   zip = $("#add-zip").val("");
         //   ...
-    });
-  
+    });    
+});
+
     //LOCATIONS PAGE
 
     var map;
