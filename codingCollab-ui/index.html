@@ -71,8 +71,8 @@
               </div>
               <div class="input-field col s12">
                 <i class="material-icons prefix">lock</i>
-                <input id="icon_lock new-user-password" type="tel" class="validate" required>
-                <label for="icon_lock new-user-password">Repeat Password</label>
+                <input id="repeat-password" type="tel" class="validate" required>
+                <label for="repeat-password">Repeat Password</label>
               </div class="row center">
               <a class="btn-large waves-effect waves-light brown lighten-1" id="create-btn">Join</a>
             </div>
@@ -214,7 +214,7 @@
             <a href="#">Matches</a>
           </li>
           <li>
-            <a href="#">Locations</a>
+            <a href="#" id="locations-link">Locations</a>
           </li>
           <li>
             <a href="#">Resources</a>
@@ -483,7 +483,8 @@
                           <p>
                             <input type="checkbox" id="i-agree" />
                             <label for="i-agree">I agree that other Coding Collab members can contact me for collaboration opportunities via chat.
-                              *</label>
+                              *
+                            </label>
                           </p>
                           <p>
                             <input type="checkbox" id="i-am-18" />
@@ -584,6 +585,51 @@
     </div>
   </div>
 
+  <main>
+  <div id="locations-page">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="index.html" class="brand-logo">Coding Collab</a>
+
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <a href="#">Matches</a>
+          </li>
+          <li>
+            <a href="#" id="locations-link">Locations</a>
+          </li>
+          <li>
+            <a href="#">Resources</a>
+          </li>
+          <li>
+            <a href="index.html" id="logout-btn">Sign-out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row" id="searchPrompt">
+      <h2>Check out some great places to code and collab!</h2>
+    </div>
+    <div class="row" id="mapContainer">
+      <div id="map"></div>
+    </div>
+    <div class="row" id="locationsDiv">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Hours</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
   <footer class="page-footer black">
     <div class="container">
       <div class="row">
@@ -605,10 +651,12 @@
 
   <!--  Scripts-->
   <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/ui.js"></script>
+  </script>
+
 
 </body>
 

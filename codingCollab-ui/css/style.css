@@ -56,3 +56,39 @@ p {
 footer.page-footer {
   margin: 0;
 }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#locations-page,
+#map {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#searchPrompt {
+
+  width: 100%;
+}
+
+#mapContainer {
+  height: 70%;
+  width: 100%;
+}
