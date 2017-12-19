@@ -96,3 +96,9 @@ body {
   height: 70%;
   width: 100%;
 }
+
+.matchNameLinks:hover{
+  text-decoration:underline;
+  color:navy;
+
+}

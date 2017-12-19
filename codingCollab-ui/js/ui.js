@@ -261,22 +261,67 @@ $(document).ready(function () {
             //Pass all the matched users into an array
             displayMatches(matchedUsersArray);
 
-            })
-        };
+        })
+    };
 
     function displayMatches(arrayOfUserObjects){
+        $(".leftColumnMatches").empty();
+        $(".rightColumnMatches").empty();
+
+
         console.log("displayMatches function!")
         console.log(arrayOfUserObjects);
         
         arrayOfUserObjects.sort(function(a,b) {
-           return(b.matchScore-a.matchScore)
-        })
+           return b.matchScore-a.matchScore
+        });
+
+        var sortedArray = arrayOfUserObjects;
+
+        console.log(sortedArray);
+
+        for (var i = 0; i < 6; i < i++) {
+            
+            //For matchUsers at index position 0,2,4 - left column
+            if (i%2 == 0){
+                console.log("left Column!");
+                $(".leftColumnMatches").append(`<div class="row">
+                                                <div class="icon-block">
+                                                <h2 class="center brown-text">
+                                                    <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+                                                </h2>
+                                               <h5 class="center teal-text"> <a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
+                                                <p class="center light">Match Score is ${sortedArray[i].matchScore}!
+                                                <br>Wants to be a mentor</p>
+                                                </div>
+                                                </div>`);
+                console.log(`Match ${i + 1} of 6 max appended!`);
+                                                
 
 
-    //for each item in the user
-       
+
+            } else { //For matchUsers at index position 1,3,5 - right column
+                console.log("left Column!");
+                $(".rightColumnMatches").append(`<div class="row">
+                                                    <div class="icon-block">
+                                                    <h2 class="center brown-text">
+                                                        <img src="extras/human-481829_640.png" alt="User Match Avatar" style="width:50px;height:50px;">
+                                                    </h2>
+                                                    <h5 class="center teal-text"><a class="matchNameLinks" href="#">${sortedArray[i].name}</a></h5>
+                                                    <p class="center light">Match Score is ${sortedArray[i].matchScore}!
+                                                    <br>Wants to be a mentor</p>
+                                                    </div>
+                                                    </div>`);
+
+                console.log(`Match ${i + 1} of 6 max appended!`);
+            }
+
+        }
+        console.log("Finished displaying matches")
+        
     };
 
+    //HOME PAGE
 
     //Login an EXISTING user - When login button is clicked:
     $("#login-btn").on("click", function (event) {
@@ -325,7 +370,7 @@ $(document).ready(function () {
                 console.log("create new user", firebase.auth().currentUser);
                 console.log("user:", user);
                 userData.push({
-                    name: user.email
+                    name: user.email //Using push generates the wrong key and need to push full user object, not just email
                 });
             }).catch(function (error) {
                 // Handle Errors here.
@@ -334,15 +379,8 @@ $(document).ready(function () {
                 console.log(error.code);
                 console.log(error.message);
             });
-        // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     console.log(error.code);
-        //     console.log(error.message);
-        // });
 
-        // Clears all the text boxes
+        // Clears all the login text boxes
         email = $("#new-user-email").val("");
         password = $("#new-user-password").val("");
         repeatPassword = $("#repeat-password").val("");
@@ -367,6 +405,7 @@ $(document).ready(function () {
         password = $("#existing-user-password").val("");
     });
 
+    //Listen for change in user sign in status
     firebase.auth().onAuthStateChanged(function (user) {
 
         if (user) {
@@ -418,8 +457,11 @@ $(document).ready(function () {
             name: "",
             address: "",
             city: "",
-            // state: "",
             zip: "",
+            //coordinates: {
+                //long: convert from given address
+                //lat: convert from given address
+            // },
             connectMethod: {
                 local: false,
                 localVir: false,
@@ -622,64 +664,10 @@ $(document).ready(function () {
         //   zip = $("#add-zip").val("");
         //   ...
     });
-    // 3. Create Firebase event for adding new profiles to the database as multiple records. Need to use childSnapshot. 
-    // // Firebase is always watching for changes to the data.
-    // // When changes occurs it will print them to console. This is pulling the Child data which is represented by the new train id number in Firebase.
-    // database.ref("/Users").on("child_added", function (childSnapshot, prevChildKey) {
+  
+    //LOCATIONS PAGE
 
-    //     // Print the initial data to the console.
-    //     console.log("Child Log: ", childSnapshot.val());
-
-    //     // Store everything in a new variable
-    //     var currentProfile = childSnapshot.val();
-    //     var profileName = currentProfile.userName;
-    //     var profileAddress = currentProfile.userAddress;
-    //     var profileCity = currentProfile.userCity;
-    //     var profileZip = currentProfile.userZip;
-    //     var profileLocal = currentProfile.userLocal;
-    //     var profileLocalVir = currentProfile.userLocalVir;
-    //     var profileVirtual = currentProfile.userVirtual;
-    //     var profileBeginSelf = currentProfile.userBeginSelf;
-    //     var profileBeginStudy = currentProfile.userBeginStudy;
-    //     var profileInter = currentProfile.userInter;
-    //     var profileAdv = currentProfile.userAdv;
-    //     var profileFront = currentProfile.userFront;
-    //     var profileBack = currentProfile.userBack;
-    //     var profileFull = currentProfile.userFull;
-    //     var profileIos = currentProfile.userIos;
-    //     var profileAndroid = currentProfile.userAndroid;
-    //     var profileHtml = currentProfile.userHtml;
-    //     var profileJsjq = currentProfile.userJsjq;
-    //     var profilePython = currentProfile.userPython;
-    //     var profileJava = currentProfile.userJava;
-    //     var profilecPlus = currentProfile.usercPlus;
-    //     var profilePhp = currentProfile.userPhp;
-    //     var profileBeMentor = currentProfile.userBeMentor;
-    //     var profileHaveMentor = currentProfile.userHaveMentor;
-    //     var profileMeetCoder = currentProfile.userMeetCoder;
-    //     var profileGithub = currentProfile.userGithub;
-    //     var profileLinkedIn = currentProfile.userLinkedIn;
-    //     var profileOtherProfile = currentProfile.userOtherProfile;
-    //     var profileIagree = currentProfile.userIagree;
-    //     var profileIcertify = currentProfile.userIcertify;
-
-    //     console.log("Profile Name: ", profileName);
-    //     console.log("Profile Address: ", profileAddress);
-    //     console.log("Profile City: ", profileCity);
-    //     console.log("Profile Zip: ", profileZip);
-    //     console.log("Profile Local: ", profileLocal);
-    //     console.log("Profile LocalVir: ", profileLocalVir);
-    //     console.log("Profile Virtual: ", profileVirtual);
-
-    //     // 5. Append each profile's data into an HTML table. NOT SURE how we are displaying yet.
-    //     $("#prof-display-table > tbody").append("<tr><td>I prefer to connect: </td><td>" + profileLocal +
-    //         "</td></tr><tr><td>Experience Level: </td><td>" + profileBeginSelf +
-    //         "</td></tr><tr><td>I'm interested in developing: </td><td>" + profileFront +
-    //         "</td></tr><tr><td>Coding Languages I know or Want to Learn: </td><td>" + profileJava +
-    //         "</td></tr><tr><td>I want to use Coding Collab to: </td><td>" + profileBeMentor +
-    //         "</td></tr><tr><td>More Ways to Connect with Me: </td><td>" + profileGithub + "</td></tr>");
-    // });
-
+    var map;
 
     //When the locations link is clicked: 
     $("#locations-link").on("click", function (event) {
@@ -698,9 +686,7 @@ $(document).ready(function () {
         }
         loadScript();
     });
-
-    var map;
-
+  
     //Loads map centered on Orlando
     window.initMap = function () {
         map = new google.maps.Map(document.getElementById("map"), {
