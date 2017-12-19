@@ -281,24 +281,6 @@ $(document).ready(function () {
             console.log(error.code);
             console.log(error.message);
         });
-        //Listen for users state to change (sign-in vs signed out)
-        firebase.auth().onAuthStateChanged(function (user) {
-
-            if (user) { //If user is signed in, store data and display user home page
-                console.log("This user is signed in: ", user.email);
-                var email = user.email;
-                var userID = user.uid;
-                console.log(email, userID)
-                $("#home-page").hide();
-                $("#user-home-page").show();
-                $("#locations-page").hide();
-
-                //Call function displayProfile with userID as argument - defined above
-                displayProfile(userID)
-            } else {
-                console.log("User is logged out.");
-            }
-        });
 
         // Clears all the text boxes
         email = $("#existing-user-email").val("");
@@ -318,8 +300,6 @@ $(document).ready(function () {
         var repeatPassword = $("#repeat-password").val();
         var auth = firebase.auth();
 
-        console.log(email, password, repeatPassword);
-
         //Firebase NEW user method
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
             // Handle Errors here.
@@ -327,25 +307,6 @@ $(document).ready(function () {
             var errorMessage = error.message;
             console.log(error.code);
             console.log(error.message);
-        });
-
-        // Handling the account status and redirecting to a new page.
-        firebase.auth().onAuthStateChanged(function (user) {
-
-            if (user) {
-                console.log(user); //This is not logging the correct person
-                console.log("This user is signed in: ", user.email);
-                var email = user.email;
-                var userID = user.uid;
-                console.log("NEW User email: ", email);
-                console.log("NEW User password: ", password);
-                console.log("NEW User auth: ", auth);
-                console.log("NEW User Id: ", userID);
-
-
-            } else {
-                console.log("User is logged out.");
-            }
         });
 
         // Clears all the text boxes
@@ -373,7 +334,24 @@ $(document).ready(function () {
         password = $("#existing-user-password").val("");
     });
 
+    firebase.auth().onAuthStateChanged(function (user) {
+
+        if (user) {
+            console.log("This user is signed in: ", user.email);
+            //NOT SURE IF I NEED THESE
+            var displayName = user.displayName;
+            var email = user.email;
+            userID = user.uid;
+            console.log(email, userID)
+            $("#home-page").hide();
+            $("#user-home-page").show();
+        } else {
+            console.log("User is logged out.");
+        }
+    });
+
 //Side bar functionality
+
     $(".button-collapse").sideNav({
         menuWidth: 300, // Default is 300
         edge: 'right', // Choose the horizontal origin

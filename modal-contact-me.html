@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <title>Modal Contact Form</title>
+    
+    <!-- Styling for the Contact Modal Form -->
+	<style>
+    .modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgb(126, 235, 235);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 400px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+}
+
+.close:hover { background: #00d9ff; }
+
+#contact-subj {
+    width: 100%;
+}
+
+#contact-mess {
+    width: 100%;
+    height: 70px;
+}
+
+#contact-to {
+    width: 100%;
+}
+       
+</style>
+</head>
+
+<!-- Basic HTML form elements that appear in the modal. -->
+<body>
+        <a href="#openModal">Open Modal</a>
+        
+        <div id="openModal" class="modalDialog">
+                <div>
+                        <a href="#close" title="Close" class="close">X</a>
+                        <form>
+                                <fieldset>
+                                    <label for="contact-to">To:</label>
+                                    <input type="text" id="contact-to" class="text-box" placeholder="Display Name will show here."/><p>
+                                    <label for="contact-subject">Subject:</label>
+                                    <input type="text" id="contact-subj" class="text-box" /><p>
+                                    <label for="contact-message">Message:</label>
+                                    <textarea name="text" rows="7" cols="20" wrap="soft" id="contact-mess"> </textarea><p>
+                                    <button type="submit-button" class="btn btn-default">Send Message!</button>
+                                    </fieldset>
+                            </form>
+                    </div>
+        </div>
+
+
+
+</body>
+</html>
