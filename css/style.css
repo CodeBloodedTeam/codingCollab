@@ -92,11 +92,6 @@ body {
   width: 100%;
 }
 
-#mapContainer {
-  height: 70%;
-  width: 100%;
-}
-
 .matchNameLinks:hover{
   text-decoration:underline;
   color:navy;
@@ -106,3 +101,14 @@ body {
 .centerMatches{
   text-align:center;
 }
+
+#mapContainer {
+  height: 70%;
+  width: 100%;
+}
+
+#locationsDiv{
+  padding-left:15px;
+  padding-right:15px;
+}
+
